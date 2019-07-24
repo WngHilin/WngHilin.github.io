@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[test]]></title>
     <url>%2Ftest%2F</url>
-    <content type="text"><![CDATA[一级标题二级标题三级标题四级标题五级标题BAIDU 123456#include &lt;stdio.h&gt;int main(void)&#123; printf(&quot;Hello World&quot;); return 0;&#125; 1 2 3 2 3 4 2 5 5 *** 分割线 *** 分割线 ***]]></content>
+    <content type="text"><![CDATA[一级标题二级标题三级标题四级标题五级标题BAIDU 123456#include &lt;stdio.h&gt;int main(void)&#123; printf(&quot;Hello World&quot;); return 0;&#125; 1 2 3 2 3 4 2 5 5 分割线 分割线]]></content>
       <categories>
         <category>test</category>
       </categories>
