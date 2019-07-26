@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="WngHilin&#39;s Blog">
 <meta property="og:description" content="表ADT基本概念​    空表（empty list）：大小为0的表。 ​    前驱元、后继元。 链表函数原型 123456789101112struct Node;typedef struct Node *PtrToNode;typedef PtrToNode List;typedef PtrToNode Position;List MakeEmpty(List L);int IsEmpty(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-26T04:10:10.117Z">
+<meta property="og:updated_time" content="2019-07-26T06:50:34.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第3章 表、栈和队列">
 <meta name="twitter:description" content="表ADT基本概念​    空表（empty list）：大小为0的表。 ​    前驱元、后继元。 链表函数原型 123456789101112struct Node;typedef struct Node *PtrToNode;typedef PtrToNode List;typedef PtrToNode Position;List MakeEmpty(List L);int IsEmpty(">
@@ -428,7 +428,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-26 12:10:10" itemprop="dateModified" datetime="2019-07-26T12:10:10+08:00">2019-07-26</time>
+                <time title="修改时间：2019-07-26 14:50:34" itemprop="dateModified" datetime="2019-07-26T14:50:34+08:00">2019-07-26</time>
               
             
           </span>
@@ -547,7 +547,211 @@
 <p><em>从栈弹出元素的例程</em></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pop</span><span class="params">(Stack S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(IsEmpty(S))</span><br><span class="line">        Error(<span class="string">"Empty stack"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        S-&gt;TopOfStack--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p><strong>待续。。。。。。</strong></p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="平衡符号"><a href="#平衡符号" class="headerlink" title="平衡符号"></a>平衡符号</h4><p>做一个空栈。读入字符知道文件尾。如果字符时一个开放符号，则将其推入栈中。如果字符是一个封闭符号，则当栈空时报错。否则，将栈元素弹出，如果弹出的符号不是对应的开放符号，则报错。在文件尾，如果栈非空则报错。</p>
+<h4 id="后缀表达式"><a href="#后缀表达式" class="headerlink" title="后缀表达式"></a>后缀表达式</h4><p><strong>中缀表达式</strong>：4.99 + 5.99 + 6.99 * 1.06</p>
+<p><strong>后缀表达式</strong>：4.99 1.06 * 5.99 + 6.99 1.06 * + （<strong>后缀</strong>（postfix）或<strong>逆波兰</strong>（reverse Polish）记法）</p>
+<p>计算后缀表达式的方法是使用一个栈，当见到一个数字时就把它推入到栈中；遇到一个运算符时该运算符就作用于从该栈弹出的两个数（符号）上，将所得结果推入栈中。</p>
+<p>如，计算 *<em>6 5 3 2 + 8 * + 3 + * *</em>：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">TopOfStack-&gt;</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<p>下面读到一个‘+’，所以3和2被弹出，其结果5被压入栈中：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">TopOfStack-&gt;</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<p>接着，8进栈：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">TopOfStack-&gt;</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<p>然后，8和5弹出，相乘，再将40压入栈中：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">TopOfStack-&gt;</td>
+<td align="center">40</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<p>接着又遇到‘+’号，因此40和5被弹出，并且40 + 5 = 45进栈：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">TopOfStack-&gt;</td>
+<td align="center">45</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<p>随后操作同上，得到结果288。</p>
+<h4 id="中缀到后缀的转换"><a href="#中缀到后缀的转换" class="headerlink" title="中缀到后缀的转换"></a>中缀到后缀的转换</h4><p>设我们想将中缀表达式：</p>
+<center> a + b * c + (d * e + f) * g  </center>
+转换成后缀表达式，其答案为
+
+<center>a b c * + d e * f + g * +</center>
+首先，a被读入，于是它流向输出。然后，“+”被读入并被放入栈中。接着b读入并流向输出：
+
+<table>
+<thead>
+<tr>
+<th align="center">Stack</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center">a b</td>
+</tr>
+</tbody></table>
+<p>这时“ * ”读入。操作符栈顶元素比较低，故没有输出，“ * ”进栈。接着c被读入并输出：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Stack</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="center">a b c</td>
+</tr>
+</tbody></table>
+<p>后面是一个“ + ”号。其优先级比“ * ”低，因此将“ * ”从栈弹出并放入输出中；弹出剩下的“ + ”，因为其不比“ + ”优先级低，而是具有相同的优先级，然后将“ + ”压入栈中。</p>
+<table>
+<thead>
+<tr>
+<th align="center">Stack</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="center">a b c * +</td>
+</tr>
+</tbody></table>
+<p>随后操作同上，需要注意的是“ （ ”的优先级最高，遇到“ ）”时要将所有符号弹出，直到遇到” （ “。</p>
+<h4 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h4><p>​    <strong>尾递归</strong>（tail recursion）是使用递归极端不当的例子。尾递归可以通过将递归调用变成goto语句并在其前加上对每个函数的赋值语句而手动消除。很多编译器都能自动消除尾递归，但最好还是通过手动进行消除。</p>
+<hr>
+<h2 id="队列ADT"><a href="#队列ADT" class="headerlink" title="队列ADT"></a>队列ADT</h2><h3 id="队列模型"><a href="#队列模型" class="headerlink" title="队列模型"></a>队列模型</h3><p>​    队列的基本操作是<em>Enqueue</em>和<em>Dequeue</em>。</p>
+<h3 id="队列的数组实现"><a href="#队列的数组实现" class="headerlink" title="队列的数组实现"></a>队列的数组实现</h3><p>​    对于每一个队列数据结构，我们保留一个数组<em>Queue[ ]</em>以及<em>Front</em>和<em>Rear</em>，还有记录实际存在于队列中的元素的个数<em>Size</em>。</p>
+<p>​    为使一个元素X入队，我们让<em>Size<em>和</em>Rear<em>都增加1，然后置</em>Queue[ Rear]</em> = X。若使一个元素出队，我们置返回值为<em>Queue[front]</em>，<em>Size</em>减1，然后让<em>Front</em>增加1。</p>
+<p>​    为了防止不出界，该操作需要使用<strong>循环数组</strong>（circular array）实现。</p>
+<p><em>队列的类型声明</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">QueueRecord</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QueueRecord</span> *<span class="title">Queue</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsEmpty</span><span class="params">(Queue Q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsFull</span><span class="params">(Queue Q)</span></span>;</span><br><span class="line"><span class="function">Queue <span class="title">CreateQueue</span><span class="params">(<span class="keyword">int</span> MaxElements)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DisposeQueue</span><span class="params">(Queue Q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MakeEmpty</span><span class="params">(Queue Q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Enqueue</span><span class="params">(<span class="keyword">int</span> X, Queue Q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Front</span><span class="params">(Queue Q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dequeue</span><span class="params">(Queue Q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FrotAndDequeue</span><span class="params">(Queue Q)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><em>测试队列是否为空的例程</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsEmpty</span><span class="params">(Queue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Q-&gt;Size == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>构造空队列的例程</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MakeEmpty</span><span class="params">(Queue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Q-&gt;Size = <span class="number">0</span>;</span><br><span class="line">    Q-&gt;Front = <span class="number">1</span>;</span><br><span class="line">    Q-&gt;Rear = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>入队的例程</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">Succ</span><span class="params">(<span class="keyword">int</span> Value, Queue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(++Value == Q-&gt;Capacity)</span><br><span class="line">        Value = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> Value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Enqueue</span><span class="params">(<span class="keyword">int</span> X, Queue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(IsFull(Q))</span><br><span class="line">        Error(<span class="string">"Full queue"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        Q-&gt;Size++;</span><br><span class="line">        Q-&gt;Rear = Succ(Q-&gt;Rear, Q);</span><br><span class="line">        Q-&gt;Array[Q-&gt;Rear] = X;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>出队的例程</em></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dequeue</span><span class="params">(Queue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> returnNum;</span><br><span class="line">    <span class="keyword">if</span>(IsEmpty(Q))</span><br><span class="line">        Error(<span class="string">"Empty Queue"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        returnNum = Q-&gt;Array[Q-&gt;Front];</span><br><span class="line">        Q-&gt;Front = Succ(Q-&gt;Front, Q);</span><br><span class="line">        Q-&gt;Size--;</span><br><span class="line">        <span class="keyword">return</span> returnNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -782,7 +986,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#表ADT"><span class="nav-number">1.</span> <span class="nav-text">表ADT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表"><span class="nav-number">1.2.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的错误"><span class="nav-number">1.3.</span> <span class="nav-text">常见的错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.4.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多项式ADT"><span class="nav-number">1.4.1.</span> <span class="nav-text">多项式ADT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈ADT"><span class="nav-number">2.</span> <span class="nav-text">栈ADT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈模型"><span class="nav-number">2.1.</span> <span class="nav-text">栈模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的实现"><span class="nav-number">2.2.</span> <span class="nav-text">栈的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#链表实现"><span class="nav-number">2.2.1.</span> <span class="nav-text">链表实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组实现"><span class="nav-number">2.2.2.</span> <span class="nav-text">数组实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">2.3.</span> <span class="nav-text">应用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#表ADT"><span class="nav-number">1.</span> <span class="nav-text">表ADT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表"><span class="nav-number">1.2.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的错误"><span class="nav-number">1.3.</span> <span class="nav-text">常见的错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.4.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多项式ADT"><span class="nav-number">1.4.1.</span> <span class="nav-text">多项式ADT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈ADT"><span class="nav-number">2.</span> <span class="nav-text">栈ADT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈模型"><span class="nav-number">2.1.</span> <span class="nav-text">栈模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的实现"><span class="nav-number">2.2.</span> <span class="nav-text">栈的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#链表实现"><span class="nav-number">2.2.1.</span> <span class="nav-text">链表实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组实现"><span class="nav-number">2.2.2.</span> <span class="nav-text">数组实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">2.3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#平衡符号"><span class="nav-number">2.3.1.</span> <span class="nav-text">平衡符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后缀表达式"><span class="nav-number">2.3.2.</span> <span class="nav-text">后缀表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中缀到后缀的转换"><span class="nav-number">2.3.3.</span> <span class="nav-text">中缀到后缀的转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数调用"><span class="nav-number">2.3.4.</span> <span class="nav-text">函数调用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列ADT"><span class="nav-number">3.</span> <span class="nav-text">队列ADT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#队列模型"><span class="nav-number">3.1.</span> <span class="nav-text">队列模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列的数组实现"><span class="nav-number">3.2.</span> <span class="nav-text">队列的数组实现</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -843,7 +1047,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.9k字</span>
+  <span class="post-count">博客全站共2.8k字</span>
 </div>
         
 <div class="busuanzi-count">
