@@ -191,7 +191,6 @@ JavaScript：
 
 * 定义：函数名相同，函数参数列表不同(参数个数和参数类型)，根据参数不同去执行不同操作，但在js中，同一个作用域，出现两个名字一样的函数，后面的会覆盖前面的。故**JavaScript没有真正意义上的重载**。
 
-
 ***
 
 ## 深入
@@ -481,7 +480,7 @@ function overload(){
     * **features**： 一个可选的字符串，声明了新窗口要显示的标准浏览器的特征。如果省略该参数，新窗口将具有所有标准特征。在窗口特征这个表格中，我们对该字符串的格式进行了详细的说明。
 
     * **replace**： 一个可选的布尔值。规定了装载到窗口的 URL 是在窗口的浏览历史中创建一个新条目，还是替换浏览历史中的当前条目。支持下面的值：
-                   **true - URL**： 替换浏览历史中的当前条目。
+                            **true - URL**： 替换浏览历史中的当前条目。
 
       ​             **false - URL：** 在浏览历史中创建新的条目。
 
@@ -489,5 +488,19 @@ function overload(){
 
   * **做定时器**：
 
-    * setInterval(code, millisec)：每millisec毫秒执行一次code代码
-    * 
+    * setInterval(code, millisec)：每millisec毫秒执行一次code代码。
+    * setTimeout(code, millisec)：在millisec毫秒后执行一次code代码，且只会执行一次
+    * clearInterval(setInterval的返回值)：清除setInterval设置的定时器
+    * clearTimeout(setTimeout的返回值)：清除setTimeout设置的定时器
+
+### DOM对象
+
+* DOM：文档对象模型
+  * 文档：超文本标记文档
+  * 可以用DOM提供的对象，对标记型文档进行操作，但需要把标记型文档里的所有内容封装成对象
+  * 用DOM解析html：根据html层级结构，在内存中分配一个树形结构，需要把html中的每部分封装成对象
+    * **document对象**：整个html文档
+    * **element对象**：标签对象
+    * **属性对象**
+    * **文本对象**
+    * Node节点对象：是这些对象的父对象
