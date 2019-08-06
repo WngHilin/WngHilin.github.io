@@ -1,5 +1,5 @@
 ---
-title: 数据库学习
+title: 数据库MySQL学习
 date: 2019-08-04 16:16:10
 tags: 
 - Javaweb
@@ -79,6 +79,8 @@ categories: JavaWeb
 4. **DCL(Data Control Language)数据控制语言**(了解)
    	* 用来定义数据库的访问权限和安全级别，及创建用户。关键字：GRANT， REVOKE 等
 
+
+
 ### DDL：操作数据库、表
 
 1. 操作数据库：CRUD
@@ -105,9 +107,111 @@ categories: JavaWeb
 
    3. U(**Update**)：修改
 
+      * 修改数据库的字符集
+        * alter database 数据库名称 character set 字符集名称;
+
    4. D(**Delete**)：删除
+
+      * 删除数据库
+        * drop database 数据库名称;
+        * drop database if exisits 数据库名称; -- 判断数据库是否存在
+        * **慎用**
 
    5. 使用数据库
 
-2. 操作表
+      * 查询当前正在使用的数据库名称
+        * select database();
+      * 使用数据库
+        * use 数据库名称;
 
+   
+
+2. 操作表：CRUD
+
+   1. C(**Create**)：创建
+
+      * 数据类型：
+        - int：整数类型
+          - age int;
+        - double：小数类型
+          - score double(5, 2); -- 一共5位，保留两位小数
+        - date：日期，只包含年月日，yyyy-MM-dd
+        - datetime：日期，包含年月日时分秒，yyyy-MM-dd HH:mm:ss
+        - timestamp：事件错类型，包含年月日时分秒，yyyy-MM-dd HH:mm:ss
+          - 如果将来不给这个字段赋值，或赋值为null，则默认使用当前的系统时间自动赋值
+        - varchar：字符串类型
+          - name varchar(20); -- 姓名最大20个字符
+          - zhangsan 8个字符， 张三 2个字符
+
+      - 创建表
+
+        - ```sql
+          create table 表名(
+              列名1 数据类型1,
+              列名2 数据类型2,
+              ......
+              列名n 数据类型n
+          )
+          -- 注意最后一列不用加逗号(,)
+          ```
+
+      - 复制表：create table 表名 like 被复制表名;
+
+   2. R(**Retrieve**)：查询
+
+      - 查询某个数据库中所有的表名称
+        - show tables;
+      - 查询表结构
+        - desc 表名;
+
+   3. U(**Update**)：修改
+
+      - 修改表名
+        - alter table 表名 rename to 新的表名;
+      - 修改字符集
+        - show create table 表名;-- 查看表的字符集
+        - alter table 表名 character set 字符集;
+      - 添加一列
+        - alter table 表名 add 列名 数据类型;
+      - 修改列名称 类型
+        - alter table 表名 change 列名 新列名 新数据类型;
+        - alter table 表名 modify 列名 新数据类型;
+      - 删除列
+        - alter table 表名 drop 列名;
+
+   4. D(**Delete**)：删除
+
+      - drop table if exists 表名;
+      - drop table 表名;
+
+
+
+### DML：增删改标中数据
+
+1. 添加数据
+
+   * 语法：
+
+     * insert into 表名(列名1, 列名2, ...... 列名n) values(值1, 值2, ...... 值n);
+
+   * 注意：
+
+     * 列名和值应该一一对应
+
+     * 如果表名后，不定义列名，则默认给所有列添加值
+
+       * ```sql
+         INSERT INTO stu VALUES(2,'秀吉',18,99.2,'2000-08-23',NULL,"秀吉");
+         ```
+
+     * 出了数字类型，其他类型需要' '或" "引起来
+
+2. 删除数据
+
+3. 修改数据
+
+
+
+### DQL：查询表中的记录
+
+* select * from 表名;
