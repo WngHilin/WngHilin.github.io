@@ -98,6 +98,8 @@ categories: JavaWeb
       create if not exists db4 character set gbk;
       ```
 
+      
+
    2. R(**Retrieve**)：查询
 
       * 查询所有数据库的名称：
@@ -201,17 +203,230 @@ categories: JavaWeb
      * 如果表名后，不定义列名，则默认给所有列添加值
 
        * ```sql
-         INSERT INTO stu VALUES(2,'秀吉',18,99.2,'2000-08-23',NULL,"秀吉");
+         INEINSERT INTO stu VALUES(2,'秀吉',18,99.2,'2000-08-23',NULL,"秀吉");
          ```
 
      * 出了数字类型，其他类型需要' '或" "引起来
 
 2. 删除数据
 
+   * 语法：
+
+     * delete from 表名 [where 条件];
+
+     * ```sql
+       DELETE FROM stu WHERE id=1;
+       ```
+
+   * **注意**：
+
+     * 如果不加条件，则删除表中所有记录
+     * truncate table 表名; -- 删除表，再创建一个一模一样的空表，建议用这种方式删除全部记录
+     * delete from 表名; -- 执行次数为记录条数，效率较低
+
 3. 修改数据
+
+   * 语法：
+     * update 表名 set 列名1 = 值1, 列名2 = 值2, ... [where 条件];
+   * **注意**
+     * 如果不加条件，则修改表中所有数据
 
 
 
 ### DQL：查询表中的记录
 
-* select * from 表名;
+1. 语法：
+
+```sql
+select 
+	字段列表
+from
+	表名列表
+where
+	条件列表
+group by
+	分组字段
+having
+	分组之后的条件
+order by
+	排序
+limit
+	分页限定
+```
+
+2. 基础查询
+
+   1. 多个字段的查询
+
+      * select 字段名1, 字段名2... from 表名;
+      * 可用*来替代所有字段
+
+   2. 去除重复
+
+      * ```sql
+        -- 去除重复的结果集
+        SELECT DISTINCT address FROM student;
+        ```
+
+   3. 计算列
+
+      * ```sql
+        -- 计算math和english两列的和
+        -- 如果有null参加运算，则结果仍为null
+        SELECT NAME, math, english, math + english FROM student3;
+        -- 将NULL替换为0
+        SELECT NAME, math, IFNULL(english), math + english FROM student3;
+        ```
+
+   4. 起别名
+
+      * ```sql
+        SELECT NAME, math, english, math + english AS 总分 FROM student3;
+        -- 简化形式
+        SELECT NAME, math 数学, english 英语, math + english 总分 FROM student3;
+        ```
+
+3. 条件查询
+
+   1. where后跟条件
+
+   2. 运算符
+
+      * ">", "<", "<=", ">=", "=", "<>"
+      * BETWEEN...AND
+      * IN（集合）
+      * LIKE
+        * 占位符：
+          * _：单个任意字符
+          * %：多个任意字符
+      * IS NULL
+      * and 或 &&
+      * or 或 ||
+      * not 或 !
+
+      ```sql
+      -- 查询年龄在20到30之间的（包含20和30）
+      SELECT * FROM student3 WHERE age BETWEEN 20 AND 30;
+      -- 查询英语成绩为空
+      SELECT * FROM student3 WHERE english IS NULL;
+      -- 查询英语成绩不为空
+      SELECT * FROM student3 WHERE english IS NOT NULL;
+      ```
+
+4. 模糊查询
+
+   * ```sql
+     -- 查询所有姓王的同学
+     SELECT * FROM student3 WHERE name LIKE '王%';
+     -- 查询名字有三个字的人
+     SELECT * FROM student3 WHERE NAME LIKE '___';
+     -- 查询姓名中有“国”字的人
+     SELECT * FROM student3 WHERE NAME LIKE '%国%';
+     ```
+
+   * 
+
+* 排序查询
+
+  * 语法：
+
+    * order by 排序字段1 排序方式1, 排序字段2 排序方式2, ...;
+    * 先按字段1排序，如有相同，按字段2排序，以此类推。
+
+  * 排序方式
+
+    * ASC：升序，默认
+
+    * DESC：降序
+
+    * ```sql
+      SELECT * FROM stu ORDER BY math ASC, english DESC;
+      ```
+
+* 聚合函数：将一列数据作为一个整体，进行纵向的计算。
+
+  1. count：计算个数
+  2. max：计算最大值
+  3. min：计算最小值
+  4. sum：计算和
+  5. avg：计算平均值
+     * **注**：所有聚合函数会排除为NULL的数据
+
+  ```sql
+  SELECT AVG(math) FROM student;
+  ```
+
+  排除NULL的解决方案
+
+  ```sql
+  SELECT COUNT(IFNULL(english,0)) FROM student;-- 把NULL替换成0，以便统计人数等（不会修改原数据）
+  -- 或选择非空的列进行计算
+  ```
+
+* 分组查询：
+
+  * 语法：group by 分组字段;
+
+  ```sql
+  -- 按照性别分组，并分别求数学的平均分
+  SELECT sex, AVG(math) FROM student GROUP BY sex;
+  -- 加入分组限定条件
+  SELECT sex, AVG(math), COUNT(id) FROM student WHERE math > 60 GROUP BY sex;
+  SELECT sex, AVG(math), COUNT(id) FROM student WHERE math > 60 GROUP BY sex HAVING COUNT(id)>1;
+  ```
+
+  * **注意**：
+    1. 分组之后查询的字段：分组字段，聚合函数
+    2. where 和 having的区别
+       1. where在分组前限定，如不满足条件，则不参与分组；having在分组后进行限定，如果不满足结果，则不会被查询出来。
+       2. where后不可以跟聚合函数，having可以
+
+* 分页查询：
+
+  * 语法：limit 开始的索引, 每页查询的条数;
+  * 开始的索引 = （当前的页码 - 1） *  每页显示的条数
+
+  ```sql
+  -- 每一页显示3条记录
+  SELECT * FROM student LIMIT 0,3; -- 第一页
+  SELECT * FROM student LIMIT 3,3; -- 第二页
+  ```
+
+  * 分页操作是一个MySQL“ 方言 ” 
+
+### 约束
+
+* **概念**：对标重的数据进行限定，保证数据的正确性、有效性和完整性。
+
+* **分类**:
+
+  1. 主键约束：primary key
+  2. 非空约束：not null
+  3. 唯一约束：unique
+  4. 外键约束：foreign key
+
+* **非空约束 not null**：
+
+  * 创建表时添加约束：
+
+  ```sql
+  CREATE TABLE stu(
+  	id INT,
+  	name VARCHAR(32) NOT NULL -- name 为非空约束
+  );
+  
+  ```
+
+  * 创建表后添加约束：
+
+  ```sql
+  ALTER TABLE stu MODIFY name VARCHAR(32) NOT NULL;
+  ```
+
+  * 删除非空约束
+
+  ```sql
+  ALTER TABLE stu MODIFY name VARCHAR(32);
+  ```
+
+  
