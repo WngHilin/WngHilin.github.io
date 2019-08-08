@@ -42,12 +42,12 @@ categories: JavaWeb
 
 ### 目录结构
 
- 	1. 安装目录：
-     * 配置文件 my.ini
- 	2. 数据目录
-     * 数据库：文件夹
-     * 表：文件
-     * 数据：文件中存储的数据
+1. 安装目录
+   * 配置文件：my.ini
+2. 数据目录
+   * 数据库：文件夹
+   * 表：文件
+   * 数据：文件中储存的数据
 
 ***
 
@@ -423,10 +423,130 @@ limit
   ALTER TABLE stu MODIFY name VARCHAR(32) NOT NULL;
   ```
 
-  * 删除非空约束
+  * 删除非空约束 <a name="DeleteNotNULL" href></a>
 
   ```sql
   ALTER TABLE stu MODIFY name VARCHAR(32);
   ```
 
-  
+* **唯一约束：unique**
+
+  * ```sql
+    CREATE TABLE stu(
+    	id INT, 
+    	phone_number VARCHAR(20) UNIQUE
+    );
+    
+    ALTER TABLE stu MODIFY phone_number VARCHAR(20) UNIQUE;
+    -- 若已有重复数据，则无法添加唯一约束
+    -- mysql中 唯一约束限定的列的值可以有多个null
+    ```
+
+  * 删除
+
+    * ```sql
+      ALTER TABLE stu DROP INDEX phone_number;
+      -- 注意，与非空约束方法不同
+      ```
+
+* **主键约束：primary key**
+
+  * 基本概念：
+
+    1. 含义：非空且唯一
+    2. 一张表只有一个字段为主键
+    3. 主键就是表中记录的唯一标识
+
+  * ```sql
+    CREATE TABLE stu(
+    	id INT PRIMARY KEY, 
+    	name VARCHAR(20) 
+    );
+    ALTER TABLE stu MODIFY id VARCHAR(20) PRIMARY KEY;
+    -- 有重复或空则无法添加主键约束
+    ```
+
+  * 删除
+
+    * ```sql
+      ALTER TABLE stu DROP PRIMARY KEY;
+      ```
+
+  * 自动增长：
+
+    * 概念：如果某一列是数值类型，使用 auto_increment 可以完成值的自动增长
+    * 创建表时，添加主键乐数，并完成主键自增长
+
+    ```sql
+    CREATE TABLE stu(
+    	id INT PRIMARY KEY AUTO_INCREMENT, 
+    	NAME VARCHAR(20) 
+    );
+    
+    -- 之后不用输入id也可实现id的自增长，但也可手动输入
+    INSERT INTO stu VALUES(NULL, 'ccc');
+    ```
+
+    * 删除：与非空约束方法相同，<a id="gotoMoreDeleteNotNULL" href="#DeleteNotNULL">非空约束的删除</a>
+
+* **外键约束：foreign key**，让表与表产生关系，从而保证数据的正确性
+
+  1. 在创建表时可以添加外键
+
+     * 语法：
+
+       ```sql
+       CREATE TABLE 表名(
+           ......
+           外键列,-- 注意这个逗号
+           constraint 外键名称 foreign key (外键列名称) references 主表名称(主表列的名称)
+       );
+       ```
+
+       ```sql
+       CREATE TABLE employee(
+       	id INT PRIMARY KEY AUTO_INCREMENT,
+       	NAME VARCHAR(20),
+       	age INT,
+       	dep_id INT, -- 外键对应主表的主键
+       	CONSTRAINT emp_dept_fk FOREIGN KEY (dep_id) REFERENCES department(id)
+       )
+       ```
+
+  2. 删除外键
+
+     ```sql
+     ALTER TABLE employee DROP FOREIGN KEY emp_dept_fk;
+     ```
+
+  3. 创建表后创建外键
+
+     ```sql
+     ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键列名称) REFERENCES 主表名称(主表列的名称);
+     ```
+
+  4. 级联操作：
+
+     * 设置级联更新
+
+       ```sql
+       ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键列名称) REFERENCES 主表名称(主表列的名称) ON UPDATE CASCADE;
+       ```
+
+     * 设置级联删除
+
+       ```sql
+       -- 二者可以同时存在
+       ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键列名称) REFERENCES 主表名称(主表列的名称) ON DELETE CASCADE;
+       ```
+
+***
+
+## 数据库的设计
+
+### 多表之间的关系
+
+1. 一对一
+2. 一对多（多对一）
+3. 多对多
+
