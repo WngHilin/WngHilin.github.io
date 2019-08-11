@@ -120,16 +120,16 @@
 
 
   <meta name="description" content="数据库的基本概念  数据库(database)： 用于存储和管理数据的仓库 特点： 持久化存储数据（数据库就是一个文件系统） 方便存储和管理数据 使用同意的方式操作数据库  — SQL   数据库软件：Oracle、MySQL、Microsoft SQL Server、DB2     MySQL配置 服务启动： net start mysql：需要管理员权限 services.msc   登录：">
-<meta name="keywords" content="Javaweb,学习,数据库,MySQL">
+<meta name="keywords" content="Javaweb,学习,数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库MySQL学习">
+<meta property="og:title" content="MySQL简要学习">
 <meta property="og:url" content="http://yoursite.com/JavaWeb_MySQL/index.html">
 <meta property="og:site_name" content="WngHilin&#39;s Blog">
 <meta property="og:description" content="数据库的基本概念  数据库(database)： 用于存储和管理数据的仓库 特点： 持久化存储数据（数据库就是一个文件系统） 方便存储和管理数据 使用同意的方式操作数据库  — SQL   数据库软件：Oracle、MySQL、Microsoft SQL Server、DB2     MySQL配置 服务启动： net start mysql：需要管理员权限 services.msc   登录：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-08T08:37:15.744Z">
+<meta property="og:updated_time" content="2019-08-11T08:45:08.191Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库MySQL学习">
+<meta name="twitter:title" content="MySQL简要学习">
 <meta name="twitter:description" content="数据库的基本概念  数据库(database)： 用于存储和管理数据的仓库 特点： 持久化存储数据（数据库就是一个文件系统） 方便存储和管理数据 使用同意的方式操作数据库  — SQL   数据库软件：Oracle、MySQL、Microsoft SQL Server、DB2     MySQL配置 服务启动： net start mysql：需要管理员权限 services.msc   登录：">
 
 
@@ -149,7 +149,7 @@
   };
 </script>
 
-  <title>数据库MySQL学习 | WngHilin's Blog</title>
+  <title>MySQL简要学习 | WngHilin's Blog</title>
   
 
 
@@ -414,7 +414,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库MySQL学习
+          <h1 class="post-title" itemprop="name headline">MySQL简要学习
 
               
             
@@ -440,24 +440,12 @@
                 
               
 
-              <time title="创建时间：2019-08-04 16:16:10" itemprop="dateCreated datePublished" datetime="2019-08-04T16:16:10+08:00">2019-08-04</time>
+              <time title="创建时间：2019-08-11 16:43:16 / 修改时间：16:45:08" itemprop="dateCreated datePublished" datetime="2019-08-11T16:43:16+08:00">2019-08-11</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-08 16:37:15" itemprop="dateModified" datetime="2019-08-08T16:37:15+08:00">2019-08-08</time>
               
             
           </span>
@@ -571,24 +559,32 @@
 </li>
 </ol>
 <h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ol>
-<li><strong>DDL(Data Definition Language)数据定义语言</strong><pre><code>* 用来定义数据库对象：数据库，表，列等。关键字：create, drop,alter 等</code></pre></li>
-<li><strong>DML(Data Manipulation Language)数据操作语言</strong><pre><code>* 用来对数据库中表的数据进行增删改。关键字：insert, delete, update 等</code></pre></li>
-<li><strong>DQL(Data Query Language)数据查询语言</strong><pre><code>* 用来查询数据库中表的记录(数据)。关键字：select, where 等</code></pre></li>
-<li><strong>DCL(Data Control Language)数据控制语言</strong>(了解)<pre><code>* 用来定义数据库的访问权限和安全级别，及创建用户。关键字：GRANT， REVOKE 等</code></pre></li>
+<li><strong>DDL(Data Definition Language)数据定义语言</strong><ul>
+<li>用来定义数据库对象：数据库，表，列等。关键字：create, drop,alter 等</li>
+</ul>
+</li>
+<li><strong>DML(Data Manipulation Language)数据操作语言</strong><ul>
+<li>用来对数据库中表的数据进行增删改。关键字：insert, delete, update 等</li>
+</ul>
+</li>
+<li><strong>DQL(Data Query Language)数据查询语言</strong><ul>
+<li>用来查询数据库中表的记录(数据)。关键字：select, where 等</li>
+</ul>
+</li>
+<li><strong>DCL(Data Control Language)数据控制语言</strong>(了解)<ul>
+<li>用来定义数据库的访问权限和安全级别，及创建用户。关键字：GRANT， REVOKE 等</li>
+</ul>
+</li>
 </ol>
 <h3 id="DDL：操作数据库、表"><a href="#DDL：操作数据库、表" class="headerlink" title="DDL：操作数据库、表"></a>DDL：操作数据库、表</h3><ol>
 <li><p>操作数据库：CRUD</p>
 <ol>
 <li><p>C(<strong>Create</strong>)：创建</p>
 <ul>
-<li><p>创建数据库</p>
-<ul>
-<li><p>create database 数据库名;</p>
-</li>
-<li><p>create database if not exists 数据库名;– 如果数据库不存在，则创建数据库</p>
-</li>
-<li><p>create database 数据库名 character set 字符集名;– 手动指定字符集</p>
-</li>
+<li>创建数据库<ul>
+<li>create database 数据库名;</li>
+<li>create database if not exists 数据库名;– 如果数据库不存在，则创建数据库</li>
+<li>create database 数据库名 character set 字符集名;– 手动指定字符集</li>
 </ul>
 </li>
 </ul>
@@ -649,7 +645,8 @@
 <ol>
 <li><p>C(<strong>Create</strong>)：创建</p>
 <ul>
-<li>数据类型：<ul>
+<li><p>数据类型：</p>
+<ul>
 <li>int：整数类型<ul>
 <li>age int;</li>
 </ul>
@@ -671,8 +668,6 @@
 </li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p>创建表</p>
 <ul>
 <li><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">    列名<span class="number">1</span> 数据类型<span class="number">1</span>,</span><br><span class="line">    列名<span class="number">2</span> 数据类型<span class="number">2</span>,</span><br><span class="line">    ......</span><br><span class="line">    列名n 数据类型n</span><br><span class="line">)</span><br><span class="line"><span class="comment">-- 注意最后一列不用加逗号(,)</span></span><br></pre></td></tr></table></figure>
@@ -1023,10 +1018,154 @@
 </ul>
 <hr>
 <h2 id="数据库的设计"><a href="#数据库的设计" class="headerlink" title="数据库的设计"></a>数据库的设计</h2><h3 id="多表之间的关系"><a href="#多表之间的关系" class="headerlink" title="多表之间的关系"></a>多表之间的关系</h3><ol>
-<li>一对一</li>
-<li>一对多（多对一）</li>
-<li>多对多</li>
+<li>一对一<ul>
+<li>一个人只有一张身份证，一个身份证只能对应一个人</li>
+</ul>
+</li>
+<li>一对多（多对一）<ul>
+<li>一个部门有多个员工，一个员工只属于一个部门</li>
+</ul>
+</li>
+<li>多对多<ul>
+<li>一个学生可以选择很多门课程，一个课程也可以被很多学生选择</li>
+</ul>
+</li>
 </ol>
+<ul>
+<li>多表关系的实现<ul>
+<li>一对多（多对一）：<ul>
+<li>在多的一方建立外键，指向一的一方的主键</li>
+</ul>
+</li>
+<li>多对多：<ul>
+<li>需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。</li>
+</ul>
+</li>
+<li>一对一：<ul>
+<li>在任意一方添加唯一外键指向另一方的主键</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h3><blockquote>
+<p>设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些不同的规范要求被称为不同的范式，各种范式呈递次规范，越高的范式数据库冗余越小。</p>
+<p>目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）。</p>
+</blockquote>
+<ul>
+<li>分类<ol>
+<li>第一范式(1NF)：每一列都是不可分割的原子数据项</li>
+<li>第二范式(2NF)：在1NF基础上，非码属性必须完全依赖于候选码（在1NF基础上<strong>消除</strong>非主属性对主码的<strong>部分函数依赖</strong>）<ul>
+<li>函数依赖：A–&gt;B，通过A的属性值，可以确定唯一B属性的值，则称B依赖于A。<ul>
+<li>如：学号–&gt;姓名  （学号，课程名称）–&gt; 分数</li>
+</ul>
+</li>
+<li>完全函数依赖：A–&gt;B，如果A是一个<strong>属性组</strong>，则B属性值的确定需要依赖于A属性组中<strong>所有</strong>的属性值<ul>
+<li>如：（学号，课程名称）–&gt; 分数</li>
+</ul>
+</li>
+<li>部分函数依赖：A–&gt;B，如果A 是一个<strong>属性组</strong>，则B属性值的确定只需要依赖于A属性值中<strong>某一些</strong>值即可<ul>
+<li>如：（学号，课程名称）–&gt; 姓名</li>
+</ul>
+</li>
+<li>传递函数依赖：A–&gt;B，B–C，称C传递依赖于A</li>
+<li>码：如果在一张表中，一个属性或属性组，被其他<strong>所有属性</strong>所完全依赖，则称这个属性（属性组）为该表的码<ul>
+<li>主属性：码属性组中的所有属性</li>
+<li>非主属性：除去码属性组的属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三范式(3NF)：在2NF基础上，任何非主属性不依赖于其它非主属性（在2NF基础上消除传递依赖）</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="数据库的备份和还原"><a href="#数据库的备份和还原" class="headerlink" title="数据库的备份和还原"></a>数据库的备份和还原</h2><ol>
+<li>命令行<ul>
+<li>语法：<ul>
+<li>备份：mysqldump -u用户名 -p密码 数据库的名称 &gt; 保存的路径</li>
+<li>还原：<ol>
+<li>登录数据库</li>
+<li>创建数据库</li>
+<li>使用数据库</li>
+<li>执行文件：source 文件路径</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图形化工具</li>
+</ol>
+<hr>
+<h2 id="MySQL多表-amp-事务"><a href="#MySQL多表-amp-事务" class="headerlink" title="MySQL多表&amp;事务"></a>MySQL多表&amp;事务</h2><h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><ul>
+<li><p>查询语法:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line">	列名列表</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">	表名列表</span><br><span class="line">where......</span><br><span class="line"><span class="comment">-- 查询出的结果为多个表的笛卡儿积</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分类</p>
+<ol>
+<li><p>内连接查询</p>
+<ul>
+<li><p>隐式内连接：使用where条件消除无用数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp, department <span class="keyword">WHERE</span> emp.id = department.id;</span><br><span class="line"><span class="comment">-- 或者使用别名</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	t1.name,</span><br><span class="line">	t1.gender,</span><br><span class="line">	t2.name</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">	emp t1, department t2</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">	t1.id = t2.id;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显式内连接：</p>
+<ul>
+<li>select 字段列表 from 表名1 inner join 表名2 on 条件;</li>
+<li>select 字段列表 from 表名1 join 表名2 on 条件;</li>
+</ul>
+</li>
+<li><p>注意事项</p>
+<ul>
+<li>从哪些表查找数据、条件是什么、查询哪些字段</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>外连接查询</p>
+<ul>
+<li>左外连接<ul>
+<li>语法：select 字段列表 from 表1 left [outer] join 表2 on 条件;</li>
+<li>查询的是<strong>左表</strong>所有数据以及其交集部分</li>
+</ul>
+</li>
+<li>右外连接<ul>
+<li>语法：select 字段列表 from 表1 right [outer] join 表2 on 条件;</li>
+<li>查询的是<strong>右表</strong>所有数据以及其交集部分</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>子查询</p>
+<ul>
+<li><p>概念：查询中嵌套查询，称嵌套查询为子查询</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 例子：查找工资最高的员工</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> emp.<span class="string">`salary`</span>=(<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(salary) <span class="keyword">FROM</span> emp);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不同情况</p>
+<ol>
+<li><p>结果是<strong>单行单列</strong></p>
+<ul>
+<li>子查询可以作为条件，使用运算符判断，如上方例子</li>
+<li>$&gt;,&lt;,&gt;=,&lt;=,=$，</li>
+</ul>
+</li>
+<li><p>结果是<strong>多行单列</strong></p>
+<ul>
+<li><p>子查询可以作为条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 例子：查询财务部和市场部的所有人员</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> dept_id <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> dept <span class="keyword">WHERE</span> <span class="keyword">NAME</span> = <span class="string">'财务部'</span> <span class="keyword">OR</span> <span class="keyword">NAME</span> = <span class="string">'市场部'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>结果是<strong>多行多列</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
 
       
     </div>
@@ -1055,8 +1194,6 @@
             <a href="/tags/学习/" rel="tag"><i class="fa fa-tag"></i> 学习</a>
           
             <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
-          
-            <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
           
         </div>
       
@@ -1201,9 +1338,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1281,7 +1416,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的基本概念"><span class="nav-number">1.</span> <span class="nav-text">数据库的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL"><span class="nav-number">2.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">2.2.</span> <span class="nav-text">目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL"><span class="nav-number">3.</span> <span class="nav-text">SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用语法"><span class="nav-number">3.2.</span> <span class="nav-text">通用语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">3.3.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DDL：操作数据库、表"><span class="nav-number">3.4.</span> <span class="nav-text">DDL：操作数据库、表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DML：增删改标中数据"><span class="nav-number">3.5.</span> <span class="nav-text">DML：增删改标中数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DQL：查询表中的记录"><span class="nav-number">3.6.</span> <span class="nav-text">DQL：查询表中的记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约束"><span class="nav-number">3.7.</span> <span class="nav-text">约束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的设计"><span class="nav-number">4.</span> <span class="nav-text">数据库的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多表之间的关系"><span class="nav-number">4.1.</span> <span class="nav-text">多表之间的关系</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的基本概念"><span class="nav-number">1.</span> <span class="nav-text">数据库的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL"><span class="nav-number">2.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">2.2.</span> <span class="nav-text">目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL"><span class="nav-number">3.</span> <span class="nav-text">SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用语法"><span class="nav-number">3.2.</span> <span class="nav-text">通用语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">3.3.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DDL：操作数据库、表"><span class="nav-number">3.4.</span> <span class="nav-text">DDL：操作数据库、表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DML：增删改标中数据"><span class="nav-number">3.5.</span> <span class="nav-text">DML：增删改标中数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DQL：查询表中的记录"><span class="nav-number">3.6.</span> <span class="nav-text">DQL：查询表中的记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约束"><span class="nav-number">3.7.</span> <span class="nav-text">约束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的设计"><span class="nav-number">4.</span> <span class="nav-text">数据库的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多表之间的关系"><span class="nav-number">4.1.</span> <span class="nav-text">多表之间的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范式"><span class="nav-number">4.2.</span> <span class="nav-text">范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的备份和还原"><span class="nav-number">5.</span> <span class="nav-text">数据库的备份和还原</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL多表-amp-事务"><span class="nav-number">6.</span> <span class="nav-text">MySQL多表&amp;事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多表查询"><span class="nav-number">6.1.</span> <span class="nav-text">多表查询</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1301,7 +1436,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019-08-08</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019-08-11</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1342,7 +1477,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.6k字</span>
+  <span class="post-count">博客全站共13.7k字</span>
 </div>
         
 <div class="busuanzi-count">
