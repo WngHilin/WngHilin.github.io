@@ -1,27 +1,26 @@
 ---
-title: 数据库MySQL学习
-date: 2019-08-04 16:16:10
+title: MySQL简要学习
+date: 2019-08-11 16:43:16
 tags: 
 - Javaweb
 - 学习
 - 数据库
-- MySQL
 categories: JavaWeb
 ---
 
 ## 数据库的基本概念
 
----
+------
 
-* **数据库**(database)：
-  * 用于存储和管理数据的仓库
-  * 特点：
+- **数据库**(database)：
+  - 用于存储和管理数据的仓库
+  - 特点：
     1. 持久化存储数据（数据库就是一个文件系统）
     2. 方便存储和管理数据
     3. 使用同意的方式操作数据库  --- SQL
-  * 数据库软件：Oracle、MySQL、Microsoft SQL Server、DB2
+  - 数据库软件：Oracle、MySQL、Microsoft SQL Server、DB2
 
-***
+------
 
 ## MySQL
 
@@ -43,21 +42,21 @@ categories: JavaWeb
 ### 目录结构
 
 1. 安装目录
-   * 配置文件：my.ini
+   - 配置文件：my.ini
 2. 数据目录
-   * 数据库：文件夹
-   * 表：文件
-   * 数据：文件中储存的数据
+   - 数据库：文件夹
+   - 表：文件
+   - 数据：文件中储存的数据
 
-***
+------
 
 ## SQL
 
 ### 基本概念
 
-* Struct Query Language：结构化查询语言
-* 操作所有关系型数据库的规则
-* 每一种数据库操作方式存在不一样的地方，称为“方言”
+- Struct Query Language：结构化查询语言
+- 操作所有关系型数据库的规则
+- 每一种数据库操作方式存在不一样的地方，称为“方言”
 
 ### 通用语法
 
@@ -65,19 +64,19 @@ categories: JavaWeb
 2. 使用空格和缩进增强语句可读性
 3. MySQL的SQL语句不区分大小写，但关键字建议用大写
 4. 3种注释：
-   * 单行注释：**-- 注释内容**或 **# 注释内容**（注意空格）
-   * 多行注释：**/* 注释 */**
+   - 单行注释：**-- 注释内容**或 **# 注释内容**（注意空格）
+   - 多行注释：**/* 注释 */**
 
 ### 分类
 
 1. **DDL(Data Definition Language)数据定义语言**
-   	* 用来定义数据库对象：数据库，表，列等。关键字：create, drop,alter 等
+   - 用来定义数据库对象：数据库，表，列等。关键字：create, drop,alter 等
 2. **DML(Data Manipulation Language)数据操作语言**
-   	* 用来对数据库中表的数据进行增删改。关键字：insert, delete, update 等
+   - 用来对数据库中表的数据进行增删改。关键字：insert, delete, update 等
 3. **DQL(Data Query Language)数据查询语言**
-   	* 用来查询数据库中表的记录(数据)。关键字：select, where 等
+   - 用来查询数据库中表的记录(数据)。关键字：select, where 等
 4. **DCL(Data Control Language)数据控制语言**(了解)
-   	* 用来定义数据库的访问权限和安全级别，及创建用户。关键字：GRANT， REVOKE 等
+   - 用来定义数据库的访问权限和安全级别，及创建用户。关键字：GRANT， REVOKE 等
 
 
 
@@ -87,11 +86,10 @@ categories: JavaWeb
 
    1. C(**Create**)：创建
 
-      * 创建数据库
-        * create database 数据库名;
-
-        * create database if not exists 数据库名;-- 如果数据库不存在，则创建数据库
-        * create database 数据库名 character set 字符集名;-- 手动指定字符集
+      - 创建数据库
+        - create database 数据库名;
+        - create database if not exists 数据库名;-- 如果数据库不存在，则创建数据库
+        - create database 数据库名 character set 字符集名;-- 手动指定字符集
 
       ```sql
       -- 创建db4并且将其字符集设置为gbk
@@ -102,29 +100,29 @@ categories: JavaWeb
 
    2. R(**Retrieve**)：查询
 
-      * 查询所有数据库的名称：
-        * show databases;
-      * 查看某个数据库的字符集，查询某个数据库的创建语句
-        * show create database 数据库名称;
+      - 查询所有数据库的名称：
+        - show databases;
+      - 查看某个数据库的字符集，查询某个数据库的创建语句
+        - show create database 数据库名称;
 
    3. U(**Update**)：修改
 
-      * 修改数据库的字符集
-        * alter database 数据库名称 character set 字符集名称;
+      - 修改数据库的字符集
+        - alter database 数据库名称 character set 字符集名称;
 
    4. D(**Delete**)：删除
 
-      * 删除数据库
-        * drop database 数据库名称;
-        * drop database if exisits 数据库名称; -- 判断数据库是否存在
-        * **慎用**
+      - 删除数据库
+        - drop database 数据库名称;
+        - drop database if exisits 数据库名称; -- 判断数据库是否存在
+        - **慎用**
 
    5. 使用数据库
 
-      * 查询当前正在使用的数据库名称
-        * select database();
-      * 使用数据库
-        * use 数据库名称;
+      - 查询当前正在使用的数据库名称
+        - select database();
+      - 使用数据库
+        - use 数据库名称;
 
    
 
@@ -132,7 +130,7 @@ categories: JavaWeb
 
    1. C(**Create**)：创建
 
-      * 数据类型：
+      - 数据类型：
         - int：整数类型
           - age int;
         - double：小数类型
@@ -192,44 +190,44 @@ categories: JavaWeb
 
 1. 添加数据
 
-   * 语法：
+   - 语法：
 
-     * insert into 表名(列名1, 列名2, ...... 列名n) values(值1, 值2, ...... 值n);
+     - insert into 表名(列名1, 列名2, ...... 列名n) values(值1, 值2, ...... 值n);
 
-   * 注意：
+   - 注意：
 
-     * 列名和值应该一一对应
+     - 列名和值应该一一对应
 
-     * 如果表名后，不定义列名，则默认给所有列添加值
+     - 如果表名后，不定义列名，则默认给所有列添加值
 
-       * ```sql
+       - ```sql
          INEINSERT INTO stu VALUES(2,'秀吉',18,99.2,'2000-08-23',NULL,"秀吉");
          ```
 
-     * 出了数字类型，其他类型需要' '或" "引起来
+     - 出了数字类型，其他类型需要' '或" "引起来
 
 2. 删除数据
 
-   * 语法：
+   - 语法：
 
-     * delete from 表名 [where 条件];
+     - delete from 表名 [where 条件];
 
-     * ```sql
+     - ```sql
        DELETE FROM stu WHERE id=1;
        ```
 
-   * **注意**：
+   - **注意**：
 
-     * 如果不加条件，则删除表中所有记录
-     * truncate table 表名; -- 删除表，再创建一个一模一样的空表，建议用这种方式删除全部记录
-     * delete from 表名; -- 执行次数为记录条数，效率较低
+     - 如果不加条件，则删除表中所有记录
+     - truncate table 表名; -- 删除表，再创建一个一模一样的空表，建议用这种方式删除全部记录
+     - delete from 表名; -- 执行次数为记录条数，效率较低
 
 3. 修改数据
 
-   * 语法：
-     * update 表名 set 列名1 = 值1, 列名2 = 值2, ... [where 条件];
-   * **注意**
-     * 如果不加条件，则修改表中所有数据
+   - 语法：
+     - update 表名 set 列名1 = 值1, 列名2 = 值2, ... [where 条件];
+   - **注意**
+     - 如果不加条件，则修改表中所有数据
 
 
 
@@ -258,19 +256,19 @@ limit
 
    1. 多个字段的查询
 
-      * select 字段名1, 字段名2... from 表名;
-      * 可用*来替代所有字段
+      - select 字段名1, 字段名2... from 表名;
+      - 可用*来替代所有字段
 
    2. 去除重复
 
-      * ```sql
+      - ```sql
         -- 去除重复的结果集
         SELECT DISTINCT address FROM student;
         ```
 
    3. 计算列
 
-      * ```sql
+      - ```sql
         -- 计算math和english两列的和
         -- 如果有null参加运算，则结果仍为null
         SELECT NAME, math, english, math + english FROM student3;
@@ -280,7 +278,7 @@ limit
 
    4. 起别名
 
-      * ```sql
+      - ```sql
         SELECT NAME, math, english, math + english AS 总分 FROM student3;
         -- 简化形式
         SELECT NAME, math 数学, english 英语, math + english 总分 FROM student3;
@@ -292,17 +290,17 @@ limit
 
    2. 运算符
 
-      * ">", "<", "<=", ">=", "=", "<>"
-      * BETWEEN...AND
-      * IN（集合）
-      * LIKE
-        * 占位符：
-          * _：单个任意字符
-          * %：多个任意字符
-      * IS NULL
-      * and 或 &&
-      * or 或 ||
-      * not 或 !
+      - ">", "<", "<=", ">=", "=", "<>"
+      - BETWEEN...AND
+      - IN（集合）
+      - LIKE
+        - 占位符：
+          - _：单个任意字符
+          - %：多个任意字符
+      - IS NULL
+      - and 或 &&
+      - or 或 ||
+      - not 或 !
 
       ```sql
       -- 查询年龄在20到30之间的（包含20和30）
@@ -315,7 +313,7 @@ limit
 
 4. 模糊查询
 
-   * ```sql
+   - ```sql
      -- 查询所有姓王的同学
      SELECT * FROM student3 WHERE name LIKE '王%';
      -- 查询名字有三个字的人
@@ -324,33 +322,33 @@ limit
      SELECT * FROM student3 WHERE NAME LIKE '%国%';
      ```
 
-   * 
+   - 
 
-* 排序查询
+- 排序查询
 
-  * 语法：
+  - 语法：
 
-    * order by 排序字段1 排序方式1, 排序字段2 排序方式2, ...;
-    * 先按字段1排序，如有相同，按字段2排序，以此类推。
+    - order by 排序字段1 排序方式1, 排序字段2 排序方式2, ...;
+    - 先按字段1排序，如有相同，按字段2排序，以此类推。
 
-  * 排序方式
+  - 排序方式
 
-    * ASC：升序，默认
+    - ASC：升序，默认
 
-    * DESC：降序
+    - DESC：降序
 
-    * ```sql
+    - ```sql
       SELECT * FROM stu ORDER BY math ASC, english DESC;
       ```
 
-* 聚合函数：将一列数据作为一个整体，进行纵向的计算。
+- 聚合函数：将一列数据作为一个整体，进行纵向的计算。
 
   1. count：计算个数
   2. max：计算最大值
   3. min：计算最小值
   4. sum：计算和
   5. avg：计算平均值
-     * **注**：所有聚合函数会排除为NULL的数据
+     - **注**：所有聚合函数会排除为NULL的数据
 
   ```sql
   SELECT AVG(math) FROM student;
@@ -363,9 +361,9 @@ limit
   -- 或选择非空的列进行计算
   ```
 
-* 分组查询：
+- 分组查询：
 
-  * 语法：group by 分组字段;
+  - 语法：group by 分组字段;
 
   ```sql
   -- 按照性别分组，并分别求数学的平均分
@@ -375,16 +373,16 @@ limit
   SELECT sex, AVG(math), COUNT(id) FROM student WHERE math > 60 GROUP BY sex HAVING COUNT(id)>1;
   ```
 
-  * **注意**：
+  - **注意**：
     1. 分组之后查询的字段：分组字段，聚合函数
     2. where 和 having的区别
        1. where在分组前限定，如不满足条件，则不参与分组；having在分组后进行限定，如果不满足结果，则不会被查询出来。
        2. where后不可以跟聚合函数，having可以
 
-* 分页查询：
+- 分页查询：
 
-  * 语法：limit 开始的索引, 每页查询的条数;
-  * 开始的索引 = （当前的页码 - 1） *  每页显示的条数
+  - 语法：limit 开始的索引, 每页查询的条数;
+  - 开始的索引 = （当前的页码 - 1） *  每页显示的条数
 
   ```sql
   -- 每一页显示3条记录
@@ -392,22 +390,22 @@ limit
   SELECT * FROM student LIMIT 3,3; -- 第二页
   ```
 
-  * 分页操作是一个MySQL“ 方言 ” 
+  - 分页操作是一个MySQL“ 方言 ” 
 
 ### 约束
 
-* **概念**：对标重的数据进行限定，保证数据的正确性、有效性和完整性。
+- **概念**：对标重的数据进行限定，保证数据的正确性、有效性和完整性。
 
-* **分类**:
+- **分类**:
 
   1. 主键约束：primary key
   2. 非空约束：not null
   3. 唯一约束：unique
   4. 外键约束：foreign key
 
-* **非空约束 not null**：
+- **非空约束 not null**：
 
-  * 创建表时添加约束：
+  - 创建表时添加约束：
 
   ```sql
   CREATE TABLE stu(
@@ -417,21 +415,21 @@ limit
   
   ```
 
-  * 创建表后添加约束：
+  - 创建表后添加约束：
 
   ```sql
   ALTER TABLE stu MODIFY name VARCHAR(32) NOT NULL;
   ```
 
-  * 删除非空约束 <a name="DeleteNotNULL" href></a>
+  - 删除非空约束 <a name="DeleteNotNULL" href></a>
 
   ```sql
   ALTER TABLE stu MODIFY name VARCHAR(32);
   ```
 
-* **唯一约束：unique**
+- **唯一约束：unique**
 
-  * ```sql
+  - ```sql
     CREATE TABLE stu(
     	id INT, 
     	phone_number VARCHAR(20) UNIQUE
@@ -442,22 +440,22 @@ limit
     -- mysql中 唯一约束限定的列的值可以有多个null
     ```
 
-  * 删除
+  - 删除
 
-    * ```sql
+    - ```sql
       ALTER TABLE stu DROP INDEX phone_number;
       -- 注意，与非空约束方法不同
       ```
 
-* **主键约束：primary key**
+- **主键约束：primary key**
 
-  * 基本概念：
+  - 基本概念：
 
     1. 含义：非空且唯一
     2. 一张表只有一个字段为主键
     3. 主键就是表中记录的唯一标识
 
-  * ```sql
+  - ```sql
     CREATE TABLE stu(
     	id INT PRIMARY KEY, 
     	name VARCHAR(20) 
@@ -466,16 +464,16 @@ limit
     -- 有重复或空则无法添加主键约束
     ```
 
-  * 删除
+  - 删除
 
-    * ```sql
+    - ```sql
       ALTER TABLE stu DROP PRIMARY KEY;
       ```
 
-  * 自动增长：
+  - 自动增长：
 
-    * 概念：如果某一列是数值类型，使用 auto_increment 可以完成值的自动增长
-    * 创建表时，添加主键乐数，并完成主键自增长
+    - 概念：如果某一列是数值类型，使用 auto_increment 可以完成值的自动增长
+    - 创建表时，添加主键乐数，并完成主键自增长
 
     ```sql
     CREATE TABLE stu(
@@ -487,13 +485,13 @@ limit
     INSERT INTO stu VALUES(NULL, 'ccc');
     ```
 
-    * 删除：与非空约束方法相同，<a id="gotoMoreDeleteNotNULL" href="#DeleteNotNULL">非空约束的删除</a>
+    - 删除：与非空约束方法相同，<a id="gotoMoreDeleteNotNULL" href="#DeleteNotNULL">非空约束的删除</a>
 
-* **外键约束：foreign key**，让表与表产生关系，从而保证数据的正确性
+- **外键约束：foreign key**，让表与表产生关系，从而保证数据的正确性
 
   1. 在创建表时可以添加外键
 
-     * 语法：
+     - 语法：
 
        ```sql
        CREATE TABLE 表名(
@@ -527,26 +525,156 @@ limit
 
   4. 级联操作：
 
-     * 设置级联更新
+     - 设置级联更新
 
        ```sql
        ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键列名称) REFERENCES 主表名称(主表列的名称) ON UPDATE CASCADE;
        ```
 
-     * 设置级联删除
+     - 设置级联删除
 
        ```sql
        -- 二者可以同时存在
        ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键列名称) REFERENCES 主表名称(主表列的名称) ON DELETE CASCADE;
        ```
 
-***
+------
 
 ## 数据库的设计
 
 ### 多表之间的关系
 
 1. 一对一
+   - 一个人只有一张身份证，一个身份证只能对应一个人
 2. 一对多（多对一）
+   - 一个部门有多个员工，一个员工只属于一个部门
 3. 多对多
+   - 一个学生可以选择很多门课程，一个课程也可以被很多学生选择
 
+
+
+- 多表关系的实现
+  - 一对多（多对一）：
+    - 在多的一方建立外键，指向一的一方的主键
+  - 多对多：
+    - 需要借助第三张中间表。中间表至少包含两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键。
+  - 一对一：
+    - 在任意一方添加唯一外键指向另一方的主键
+
+
+
+### 范式
+
+> 设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些不同的规范要求被称为不同的范式，各种范式呈递次规范，越高的范式数据库冗余越小。
+>
+> 目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）。
+
+- 分类
+  1. 第一范式(1NF)：每一列都是不可分割的原子数据项
+  2. 第二范式(2NF)：在1NF基础上，非码属性必须完全依赖于候选码（在1NF基础上**消除**非主属性对主码的**部分函数依赖**）
+     - 函数依赖：A-->B，通过A的属性值，可以确定唯一B属性的值，则称B依赖于A。
+       - 如：学号-->姓名  （学号，课程名称）--> 分数
+     - 完全函数依赖：A-->B，如果A是一个**属性组**，则B属性值的确定需要依赖于A属性组中**所有**的属性值
+       - 如：（学号，课程名称）--> 分数
+     - 部分函数依赖：A-->B，如果A 是一个**属性组**，则B属性值的确定只需要依赖于A属性值中**某一些**值即可
+       - 如：（学号，课程名称）--> 姓名
+     - 传递函数依赖：A-->B，B--C，称C传递依赖于A
+     - 码：如果在一张表中，一个属性或属性组，被其他**所有属性**所完全依赖，则称这个属性（属性组）为该表的码
+       - 主属性：码属性组中的所有属性
+       - 非主属性：除去码属性组的属性
+  3. 第三范式(3NF)：在2NF基础上，任何非主属性不依赖于其它非主属性（在2NF基础上消除传递依赖）
+
+------
+
+## 数据库的备份和还原
+
+1. 命令行
+   - 语法：
+     - 备份：mysqldump -u用户名 -p密码 数据库的名称 > 保存的路径
+     - 还原：
+       1. 登录数据库
+       2. 创建数据库
+       3. 使用数据库
+       4. 执行文件：source 文件路径
+2. 图形化工具
+
+------
+
+## MySQL多表&事务
+
+### 多表查询
+
+- 查询语法:
+
+  ```sql
+  select 
+  	列名列表
+  from
+  	表名列表
+  where......
+  -- 查询出的结果为多个表的笛卡儿积
+  ```
+
+- 分类
+
+  1. 内连接查询
+
+     - 隐式内连接：使用where条件消除无用数据
+
+       ```sql
+       SELECT * FROM emp, department WHERE emp.id = department.id;
+       -- 或者使用别名
+       SELECT
+       	t1.name,
+       	t1.gender,
+       	t2.name
+       FROM 
+       	emp t1, department t2
+       WHERE 
+       	t1.id = t2.id;
+       ```
+
+     - 显式内连接：
+
+       - select 字段列表 from 表名1 inner join 表名2 on 条件;
+       - select 字段列表 from 表名1 join 表名2 on 条件;
+
+     - 注意事项
+
+       - 从哪些表查找数据、条件是什么、查询哪些字段
+
+  2. 外连接查询
+
+     - 左外连接
+       - 语法：select 字段列表 from 表1 left [outer] join 表2 on 条件;
+       - 查询的是**左表**所有数据以及其交集部分
+     - 右外连接
+       - 语法：select 字段列表 from 表1 right [outer] join 表2 on 条件;
+       - 查询的是**右表**所有数据以及其交集部分
+
+  3. 子查询
+
+     - 概念：查询中嵌套查询，称嵌套查询为子查询
+
+       ```sql
+       -- 例子：查找工资最高的员工
+       SELECT * FROM emp WHERE emp.`salary`=(SELECT MAX(salary) FROM emp);
+       ```
+
+     - 不同情况
+
+       1. 结果是**单行单列**
+
+          - 子查询可以作为条件，使用运算符判断，如上方例子
+          - $>,<,>=,<=,=$，
+
+       2. 结果是**多行单列**
+
+          - 子查询可以作为条件
+
+            ```sql
+            -- 例子：查询财务部和市场部的所有人员
+            SELECT * FROM emp WHERE dept_id IN (SELECT id FROM dept WHERE NAME = '财务部' OR NAME = '市场部');
+            ```
+
+       3. 结果是**多行多列**
