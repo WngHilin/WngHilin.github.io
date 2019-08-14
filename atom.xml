@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-14T07:51:05.561Z</updated>
+  <updated>2019-08-14T13:03:47.943Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JDBC-在Java中操作数据库</title>
+    <link href="http://yoursite.com/JavaWeb-JDBC/"/>
+    <id>http://yoursite.com/JavaWeb-JDBC/</id>
+    <published>2019-08-14T09:02:19.000Z</published>
+    <updated>2019-08-14T13:03:47.943Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="JDBC基础"><a href="#JDBC基础" class="headerlink" title="JDBC基础"></a>JDBC基础</h2><ul><li><p>概念：Java Database Connectivity  Java数据库连接</p><ul><li>本质：官方定义的一套操作所有关系型数据库的规则，即接口。各个数据库厂商实现这套接口，提供数据库驱动 jar 包，可以使用（JDBC）编程，真正执行的代码是驱动jar包中的实现类。</li></ul></li><li><p>快速入门：</p><ul><li><p>步骤：</p><ol><li>导入驱动jar包 mysql-connector-java-版本号-bin.jar<ol><li>复制到mysql-connector-java-版本号-bin.jar到项目的libs目录下</li><li>右键 –&gt; Add As Libary</li></ol></li><li>注册驱动</li><li>获取数据库的连接对象 Connection</li><li>定义sql</li><li>获取执行sql语句的对象 Statement</li><li>执行sql，接受返回结果</li><li>处理结果</li><li>释放资源</li></ol><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class JDBCdemo1 &#123;</span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException, SQLException &#123;</span><br><span class="line">        //1.导入驱动jar包</span><br><span class="line">        //2.注册驱动</span><br><span class="line">        Class.forName("com.mysql.jdbc.Driver");</span><br><span class="line">        //3.获取数据库连接对象 Connection</span><br><span class="line">        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db2", "用户名", "密码");</span><br><span class="line">        //4.定义sql语句</span><br><span class="line">        String sql = "sql语句";</span><br><span class="line">        //5.获取执行sql的对象 Statement</span><br><span class="line">        Statement stmt = conn.createStatement();</span><br><span class="line">        //6.执行sql</span><br><span class="line">        int count = stmt.executeUpdate(sql);</span><br><span class="line">        //7.处理结果</span><br><span class="line">        System.out.println(count);</span><br><span class="line">        //8.释放资源</span><br><span class="line">        stmt.close();</span><br><span class="line">        conn.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li></ul><h2 id="详解各个对象"><a href="#详解各个对象" class="headerlink" title="详解各个对象"></a>详解各个对象</h2><h3 id="DriverManager：驱动管理对象"><a href="#DriverManager：驱动管理对象" class="headerlink" title="DriverManager：驱动管理对象"></a>DriverManager：驱动管理对象</h3><ul><li><p>功能：</p><ol><li><p>注册驱动：该执行哪一个jar包</p><ol><li><p>static void registerDriver(Driver driver) :注册与给定的驱动程序 DriverManager 。 </p></li><li><p>写代码使用：  Class.forName(“com.mysql.jdbc.Driver”);</p><ul><li>在com.mysql.jdbc.Driver类中存在静态代码块，该代码的内容为调用registerDriver方法，所以方法2较为方便。</li></ul><p><strong>注</strong>：mysql5之后的驱动jar包可以省略注册驱动的步骤</p></li></ol></li><li><p>获取数据库连接</p><ul><li>方法：static Connection getConnection(String url, String user, String password) </li><li>参数：<ul><li>url：指定连接的路径<ul><li>语法：jdbc:mysql://ip地址(域名):端口号/数据库名称</li><li>如果连接的是本机的mysql服务器，并且mysql服务器默认端口是3306，则url可以简写为：jdbc:mysql:///数据库名称</li></ul></li><li>user：用户名</li><li>password：密码</li></ul></li></ul></li></ol></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;JDBC基础&quot;&gt;&lt;a href=&quot;#JDBC基础&quot; class=&quot;headerlink&quot; title=&quot;JDBC基础&quot;&gt;&lt;/a&gt;JDBC基础&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;概念：Java Database Connectivity  Java数据库连接&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="JavaWeb" scheme="http://yoursite.com/categories/JavaWeb/"/>
+    
+    
+      <category term="Javaweb" scheme="http://yoursite.com/tags/Javaweb/"/>
+    
+      <category term="学习" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL简要学习</title>
