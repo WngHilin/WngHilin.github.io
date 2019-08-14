@@ -392,6 +392,73 @@ limit
 
   - 分页操作是一个MySQL“ 方言 ” 
 
+### DCL：管理用户&授权
+
+1. 管理用户
+
+   1. 添加用户
+
+      ```sql
+      CREATE USER '用户名'@'主机名' IDENTIFIED BY '密码';
+      ```
+
+   2. 删除用户
+
+      ```sql
+      DROP USER '用户名'@'主机名';
+      ```
+
+   3. 修改用户密码
+
+      ```sql
+      UPDATE USER SET PASSWORD =  PASSWORD('新密码') WHERE USER = '用户名';
+      SET PASSWORD FOR '用户名'@'主机名' = PASSWORD('新密码');
+      ```
+
+      * 忘记root密码
+        1. 管理员运行cmd --> net stop mysql
+        2. 使用无验证方式启动mysql：mysqld --skip-grant-tables;
+        3. 修改root密码
+        4. 在任务管理器中关闭mysqld.exe进程
+
+   4. 查询用户
+
+      ```sql
+      -- 切换到mysql数据库
+      USE mysql;
+      -- 查询user表
+      SELECT * FROM USER;
+      ```
+
+      * **注意**：% 表示可以在任意主机使用用户登录
+
+
+
+2. 权限管理
+
+   1. 查询权限
+
+      ```sql
+      SHOW GRANTS FOR '用户名'@'主机名';
+      ```
+
+   2. 授予权限
+
+      ```sql
+      GRANT 权限列表 ON 数据库名.表名 TO '用户名'@'主机名';
+      -- 授予所有权限，在任意数据库任意表上
+      GRANT ALL ON *.* TO '用户名'@'主机名';
+      ```
+   
+   3. 撤销权限
+   
+      ```sql
+      -- 撤销权限
+      REVOKE 权限列表 ON 数据库名.表名 from '用户名'@'主机名';
+      ```
+   
+      
+
 ### 约束
 
 - **概念**：对标重的数据进行限定，保证数据的正确性、有效性和完整性。
@@ -678,3 +745,107 @@ limit
             ```
 
        3. 结果是**多行多列**
+       
+          * 子查询可以作为一张虚拟表来进行表的查询
+       
+            ```sql
+            -- 查询员工入职日期是2011-11-11日之后的员工信息和部门信息
+            SELECT * FROM 
+            	dept t1, (SELECT * FROM emp WHERE emp.`join_date` > '2011-11-11') t2
+            WHERE	
+            	t1.id = t2.dept_id;
+            ```
+       
+            
+
+### 事务
+
+1. 基本介绍
+
+   * 如果一个包含多个步骤的**业务操作**，被**事务**管理，那么这些操作要么同时成功，要么同时失败
+
+   * 操作：
+
+     1. 开启事务（start transaction）
+     2. 回滚（rollback）
+     3. 提交（commit）
+
+     ```sql
+     -- 创建数据表
+     CREATE TABLE account (
+     id INT PRIMARY KEY AUTO_INCREMENT,
+     NAME VARCHAR(10),
+     balance DOUBLE
+     );
+     -- 添加数据
+     INSERT INTO account (NAME, balance) VALUES ('zhangsan', 1000), ('lisi', 1000);
+     
+     START TRANSACTION;
+     -- 张三给李四转账500元
+     -- 张三账户-500
+     UPDATE account SET balance = balance - 500 WHERE NAME = 'zhangsan';
+     -- 李四账户+500
+     这里出错了......
+     UPDATE account SET balance = balance + 500 WHERE NAME = 'lisi';
+     
+     -- 发现执行没有问题，提交事务
+     COMMIT;
+     
+     -- 发现出问题，回滚事务
+     ROLLBACK;
+     ```
+
+     4. MySQL数据库总事务默认自动提交
+
+        * 一条DML(增删改)语句，会自动提交一次
+
+        * 事务提交的方式：
+
+          * 自动提交
+          * 手动提交：
+            * 需要先开启事务
+
+        * 修改默认提交方式
+
+          * 查看默认提交方式：
+
+            SELECT @@autocommit; -- 1代表自动提交，0代表手动提交
+
+          * 修改 ：SET @@autocommit = 0;
+
+2. 四大特征
+
+   * **原子性**：是不可分割的最小操作单位，要么同时成功，要么同时失败。
+   * **持久性**：当事务提交或回滚后，数据库会持久化地保存数据。
+   * **隔离性**：多个事务之间，相互独立。
+   * **一致性**：事务操作前后，数据总量不变。
+
+3. 事务隔离级别（了解）
+
+   * 多个事务操作同一批数据，可能出现问题。可通过设置不同隔离级别来解决这些问题。
+
+   * 问题
+
+     1. 脏读：一个事务，读取到另一个事务中没有提交的数据
+     2. 不可重复读（虚读）：在同一个食物中，两次读取到的数据不一样
+     3. 幻读：一个事务操作（DML）数据表中所有记录，另一个事务添加了一条数据，则第一个事务查询不到自己的修改
+
+   * 隔离级别
+
+     1. read uncommitted
+        * 产生问题：脏读、不可重复读、幻读
+     2. read committed（Oracle默认）
+        * 产生问题：不可重复读、幻读
+     3. repeatable read（MySQL默认）
+        * 产生问题：幻读
+     4. serializable：串行化
+        * 可以解决所有问题
+
+     **注**：隔离级别从小到大安全性越来越高，效率越来越低
+
+     * 查询隔离级别：SELECT @@tx_isolation;
+
+     * 设置隔离级别：set global transaction isolation level 级别字符串;（需要重新打开生效）
+
+       
+
