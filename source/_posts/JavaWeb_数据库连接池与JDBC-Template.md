@@ -96,7 +96,6 @@ public class DruidDemo1 {
         3. 获取连接池的方法
 
 <center>示例</center>
-
 ```java
 /**
  * Druid连接池的工具类
@@ -158,7 +157,75 @@ public class JDBCUtils {
   3. 调用JdbcTemplate的方法完成CRUD操作
      * update()：执行DML语句
      * queryForMap()：查询结果，将结果封装为map集合
+       * 查询的结果集长度只能是1，即只能查找一条结果
      * queryForList()：查询结果，将结果封装为list集合
+       * 将每一条记录封装成map集合，再将这些map封装成list集合
      * query()：查询结果，将结果封装为JavaBean对象
+       * 参数：RowMapper
+         * 一般使用BeanPropertyRowMapper，见下方实例
      * queryForObject()：查询结果，将结果封装为对象
+
+update方法示例：
+
+```java
+public class JDBCTemplateDemo1 {
+    public static void main(String[] args) {
+        //创建JdbcTemplate对象
+        JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSourse());
+        //调用方法
+        String sql = "update account set balance = 5000 where id = ?";
+        int count = template.update(sql, 3);//将?的值设置为3
+        System.out.println(count);
+    }
+}
+```
+
+query方法示例：
+
+```java
+public class JDBCTemplateDemo2 {
+
+    JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSourse());
+    /**
+     * 测试query()方法,自写RowMapper实现类
+     */
+    @Test
+    public void test1(){
+        String sql = "select * from account";
+        List<Account> accounts = template.query(sql, new RowMapper<Account>() {
+
+            @Override
+            public Account mapRow(ResultSet rs, int i) throws SQLException {
+                Account ac = new Account();
+                int id = rs.getInt("id");
+                int balance = rs.getInt("balance");
+                String name = rs.getString("name");
+
+                ac.setBalance(balance);
+                ac.setName(name);
+                ac.setId(id);
+
+
+                return ac;
+            }
+        });
+
+        System.out.println(accounts);
+    }
+
+    /**
+     * 调用写好的BeanProperRowMapper类
+     */
+    @Test
+    public void test2(){
+        String sql = "select * from account";
+
+        List<Account> accounts = template.query(sql, new BeanPropertyRowMapper<Account>(Account.class));
+
+        System.out.println(accounts);
+    }
+}
+```
+
+
 

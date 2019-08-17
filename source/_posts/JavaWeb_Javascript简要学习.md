@@ -282,7 +282,7 @@ var str = "abc";
 
 <a name="LearnMoreArray" href></a>
 
-### Array：数组对象
+### Array对象
 
 * 创建：<a id="goArray" href="#Array">链接</a>
 
@@ -308,7 +308,7 @@ var str = "abc";
   * **pop**：删除并返回最后一个元素
   * **reverse**：反转数组
 
-### Date：日期对象
+### Date对象
 
 * 获取当前时间
 
@@ -343,7 +343,7 @@ date.getTime(); //1564733221660，1970年1月1日至今的毫秒数
 
 
 
-### Math：数学对象
+### Math对象
 
 都是静态方法，只能通过**类名**+**方法**调用
 
@@ -357,92 +357,23 @@ date.getTime(); //1564733221660，1970年1月1日至今的毫秒数
   * **PI**：圆周率
   * **E**：自然对数的底数
 
-### RegExp：正则表达式对象
+### 全局函数
 
-1. **正则表达式**：定义字符串的组成规则
+* 不属于任何对象，致谢写名称使用
 
-   1. 单个字符：[ ]
+  * **eval**：如果字符串是js代码，使用该方法直接执行
 
-      如：[a] [ab] [a-zA-Z0-9_]
+  ```javascript
+  var str = "alert(1234)";
+  eval(str); //执行alert(1234)
+  ```
 
-      特殊符号代表特殊含义的单个字符：
-
-      * \d：单个数字字符[0-9]
-      * \w：单个单词字符[a-zA-Z0-9_]
-
-   2. 量词符号：
-
-      * *：表示出现0次或多次
-
-      * ?：表示出现0次或1次
-
-      * +：表示出现1次或多次
-
-      * {m,n}：表示 $m<=数量<=n$（逗号之后不能打空格）
-        * m如果缺省，{ ,n}：最多n次
-        * n如果缺省，{m, }：最少m次
-
-   3. 开始结束符号：
-
-      * ^：开始
-      * $：结束
-
-2. 对象：
-
-   1. 创建：
-
-      1. var reg = new RegExp("正则表达式");
-      2. var reg = /正则表达式/;
-
-   2. 方法：
-
-      test(参数)：验证指定的字符串是否符合正则定义的规范
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>RegExp对象</title>
-    <script>
-        var reg1 = new RegExp("\\w{6,12}"); //此处两个\\，防止\w被转义为其他字符
-        var reg2 = /^\w{6,12}$/;
-
-        alert(reg1);
-        alert(reg2);
-
-        var name = "zhangsan";
-        var flag = reg1.test(name);
-        alert(flag);
-    </script>
-</head>
-<body>
-</body>
-</html>
-```
-
-
-
-### Global对象
-
-1. 特点：全局对象，不需要对象名就可以直接使用
-
-   * **eval**：如果字符串是js代码，使用该方法直接执行
-
-   ```javascript
-   var str = "alert(1234)";
-   eval(str); //执行alert(1234)
-   ```
-
-   - **encodeURI** 和 **decodeURI**：对字符进行编码和解码
-     - 将中文先编码再解码可以有效防止乱码
-   - **encodeURIComponent** 和 **decodeURIComponent**：
-     - 与上面只有编码字符多少的差别
-   - **isNaN**：判断当前字符串是否是数字，若是，返回false
-     - NaN参与的" == "比较，全部为false，包括NaN==NaN
-   - **parseInt**：解析字符串并返回一个整数
-     - 逐一判断每一个字符是否是数字，直到不是数字位置，将前面数字转为number
-     - 若第一个字符就是字母，则转为NaN
+  * **encodeURI** 和 **decodeURI**：对字符进行编码和解码
+    * 将中文先编码再解码可以有效防止乱码
+  * **encodeURIComponent** 和 **decodeURIComponent**：
+    * 与上面只有编码字符多少的差别
+  * **isNaN**：判断当前字符串是否是数字，若是，返回false
+  * **parseInt**：解析字符串并返回一个整数
 
 ### 重载
 
@@ -469,7 +400,7 @@ function overload(){
 
 * 有哪些对象：
 
-  * navigator：可以获取客户机的信息（浏览器的信息）
+  * navigator：可以货期客户机的信息（浏览器的信息）
 
     * navigator.appName; //显示浏览器的名称
 
@@ -480,6 +411,8 @@ function overload(){
 
   * location：请求url地址
 
+    * reload()  重新加载当前文档，刷新
+
     * href属性
 
       * 获取请求的url地址，即浏览器地址栏的地址
@@ -487,7 +420,7 @@ function overload(){
       * 设置url地址
 
         * 可以设置页面按钮的事件，将其跳转到另外一个页面
-
+  
         ```html
         <!DOCTYPE html>
         <html lang="en">
@@ -503,17 +436,17 @@ function overload(){
                 location.href="http://www.baidu.com";
             }
         </script>
-        </html>
+      </html>
         ```
 
   * history：请求url的历史记录
-
+  
     * 可以通过其实现浏览器前进后退功能
       * history.back(); //到上一个页面
       * history.forward(); //到下一个页面
-      * history.go(1); //到下一个页面
+    * history.go(1); //到下一个页面
       * history.go(-1); //到下一个页面
-
+  
   * **window**
 
 #### window对象
@@ -555,56 +488,200 @@ function overload(){
 
   * close()：关闭窗口，浏览器兼容性较差
 
-  * **做定时器**：
+    * 关闭调用该方法的窗口
 
-    * setInterval(code, millisec)：每millisec毫秒执行一次code代码。
+  * **定时器有关方法**：
+  
+    * setInterval(code, millisec)：每millisec毫秒执行一次code（js代码或方法对象）代码
+      * setInterval("fun();", 3000);
+      * setInterval(fun, 3000);
     * setTimeout(code, millisec)：在millisec毫秒后执行一次code代码，且只会执行一次
     * clearInterval(setInterval的返回值)：清除setInterval设置的定时器
     * clearTimeout(setTimeout的返回值)：清除setTimeout设置的定时器
 
 ### DOM对象
 
+#### 简介
+
 * DOM：文档对象模型
+  * 文档：超文本标记文档
+  
+  * 可以用DOM提供的对象，对标记型文档进行操作，但需要把标记型文档里的所有内容封装成对象
+  
+  * 用DOM解析html：根据html层级结构，在内存中分配一个树形结构，需要把html中的每部分封装成对象
+    
+    ![](https://www.w3school.com.cn/i/ct_htmltree.gif)
+    
+    * **注意每个标签节点后还有文本节点**
+    
+    * **Document对象**：整个html文档
+    * **Element对象**：标签对象
+    * **Attribute对象**：属性对象
+    * **Text对象**：文本对象
+    * **Comment对象**：注释对象
+    * Node节点对象：是这些对象的父对象
 
-* 功能：控制html文档的内容
+#### 核心DOM模型
 
-* 代码：获取页面标签（元素）对象  Element
+- **Document对象**：整个html文档
 
-  * document.getElementById("id值");  通过元素的id来获得元素对象
+  1. 创建（获取）
+     * window.document(window可省略)
+  2. 方法
+     1. 获取Element对象
+        1. getElementById()  查找具有指定的唯一 ID 的元素
+        2. getElementsByTagName()  根据元素名称获取元素对象（多个），返回值是数组
+        3. getElementsByClassName()  根据Class属性值获取元素对象们，返回值是数组
+        4. getElementsByName()  根据name属性值获取元素对象们
+     2. 创建其他DOM对象
+        1. createAttribute(name)
+        2. createComment()
+        3. createElement()
+        4. createTextNode()
+  3. 属性
 
-* 操作Element对象：
+- **Element对象**：标签对象
 
-  1. 修改属性值：
+  - 通过Document对象获取
+  - 方法
+    - removeAttribute()：删除属性
+    - setAttribute()：设置属性
 
-  2. 修改标签体内容：
+  
 
-     属性：innerHTML
+- Node：节点对象
 
+  - 特点：所有DOM对象都可以被认为是节点
+  - 方法：
+    - CRUD DOM树：
+      - appendChild()：项节点的子节点列表的结尾添加新的子节点
+      - removeChild()：删除（并返回）当前节点指定的子节点
+      - replaceChild()：用新节点替换一个子节点
+  - 属性：
+    - parentNode：返回当前节点的父节点
 
+#### HTML DOM
+
+1. 标签体的设置和获取：innnerHTML
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTMLDOM</title>
+</head>
+<body>
+    <div id="div1">
+        div
+    </div>
+
+    <script>
+        var div = document.getElementById("div1");
+
+        //div中替换一个文本输入框
+        div.innerHTML = "<input type='text'>"
+        //div中增加一个文本输入框
+        div.innerHTML += "<input type='text'>"
+    </script>
+</body>
+</html>
+```
+
+2. 使用html元素对象的属性
+
+3. 控制元素样式
+
+   1. 使用元素的style属性来设置
+
+      ```javascript
+      <!-- 方式1 -->
+              var div1 = document.getElementById("div1");
+              div1.onclick = function () {
+                  div1.style.border = "1px solid red";
+                  div1.style.width = "200px";
+                  div1.style.height = "200px";
+              }
+      ```
+
+      
+
+   2. 提前定义好类选择器的样式，通过元素的className属性来设置其class属性值
+
+   ```html
+   ...
+       <style>
+           .d2{
+               border: 1px solid #c4ff9e;
+               width: 200px;
+               height: 200px;
+           }
+       </style>
+   ...
+       <script>
+            <!-- 方式2 -->
+           var div2 = document.getElementById("div2");
+           div2.onclick = function () {
+               div2.className = "d2"
+           }
+       </script>
+   ...
+   ```
+
+   
 
 ### 事件
 
-* 功能：某些组件被执行了某些操作后，触发某些代码的执行
+* 概念：某些组件被执行了某些操作后，触发某些代码的执行
 
-* 绑定事件
+  * 事件：某些操作，如：单击、双击、键盘按下、鼠标移动
+  * 事件源：组件，如：按钮、文本输入框
+  * 监听器：代码
+  * 注册监听：将事件、事件源、监听器结合在一起。当事件源上发生了某个事件，则出发执行某个监听器代码
 
-  1. 直接在html标签上，指定事件的属性，属性值就是js代码
+* 常见的事件：
 
-     1. 事件：onclick：点击
+  1. 点击事件
+     1. **onclick**：单击事件
+     2. **ondblclick**：双击事件
 
-        ```html
-        <img id="light" src="img/off.gif" onclick="function();">
-        ```
+  2. 焦点事件
 
-     2. 通过js获取元素对象，指定事件属性，设置一个函数
+     1. **onblur**：失去焦点
+     2. **onfocus**：元素获得焦点
 
-        ```html
-        <script>
-                var light = document.getElementById("light");
-                function fun2(){}
-                light.onclick = fun2();
-        </script>
-        ```
+  3. 加载事件
 
-        
+     1. **onload**：一张页面或一幅图像完成加载
 
+  4. 鼠标事件
+
+     1. **onmousedown**：鼠标按钮被按下
+     2. **onmousemove**：鼠标被移动
+     3. **onmouseover**：鼠标移到某元素之上
+     4. **onmouseup**：鼠标按键被松开
+
+     ```javascript
+     document.getElementById("text").onmousedown=function(event){
+         event.button;//button值为0，左键被点击；1为中建，2为右键
+     }
+     ```
+
+     
+
+  5. 键盘事件
+
+     1. **onkeydown**：某个键盘按键被按下
+     2. **onkeyup**：某个键盘按键被松开
+     3. **onkeypress**：某个键盘按键按下再松开
+
+  6. 选择和改变
+
+     1. **onchange**：域的内容被改变
+     2. **onselect**：文本被选中
+
+  7. 表单事件：
+
+     1. **onsubmit**：确认按钮被点击
+        * 用于阻止表单提交，如果该事件方法返回值为false，则表单不会提交
+     2. **onreset**：重置按钮被点击
