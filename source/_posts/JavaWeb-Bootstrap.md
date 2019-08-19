@@ -117,9 +117,9 @@ categories: JavaWeb
 
 * 全局CSS样式
 
-  * 按钮：[https://v3.bootcss.com/css/#buttons](https://v3.bootcss.com/css/#buttons)
+  * **按钮**：[官方文档](https://v3.bootcss.com/css/#buttons)
 
-    * 设置默认按钮：[https://v3.bootcss.com/css/#buttons-tags](https://v3.bootcss.com/css/#buttons-tags)
+    * 设置默认按钮：[官方文档](https://v3.bootcss.com/css/#buttons-tags)
 
       ```html
       <a class="btn btn-default" href="#" role="button">Link</a>
@@ -128,7 +128,7 @@ categories: JavaWeb
       <input class="btn btn-default" type="submit" value="Submit">
       ```
 
-    * 设置按钮样式: [https://v3.bootcss.com/css/#buttons-options](https://v3.bootcss.com/css/#buttons-options)
+    * 设置按钮样式: [官方文档](https://v3.bootcss.com/css/#buttons-options)
 
       ```html
       <button type="button" class="btn btn-default">（默认样式）Default</button>
@@ -140,30 +140,157 @@ categories: JavaWeb
       <button type="button" class="btn btn-link">（链接）Link</button>
       ```
 
-    * 设置按钮尺寸：[https://v3.bootcss.com/css/#buttons-sizes](https://v3.bootcss.com/css/#buttons-sizes)
+    * 设置按钮尺寸：[官方文档](https://v3.bootcss.com/css/#buttons-sizes)
 
       ```html
-      <button type="button" class="btn btn-primary btn-lg">（大按钮）Large button</button>
       <button type="button" class="btn btn-default btn-lg">（大按钮）Large button</button>
-      <button type="button" class="btn btn-primary">（默认尺寸）Default button</button>
       <button type="button" class="btn btn-default">（默认尺寸）Default button</button>
-      <button type="button" class="btn btn-primary btn-sm">（小按钮）Small button</button>
       <button type="button" class="btn btn-default btn-sm">（小按钮）Small button</button>
-      <button type="button" class="btn btn-primary btn-xs">（超小尺寸）Extra small button</button>
       <button type="button" class="btn btn-default btn-xs">（超小尺寸）Extra small button</button>
       ```
+    
+  * **图片**
 
-  * 图片
+    * 图片在任意尺寸都占100%
 
-  * 表格
+      ```html
+      <img src="..." class="img-responsive" alt="Responsive image">
+      ```
 
-  * 表单
+    * 图片的形状
+
+      ```html
+      <!--方形-->
+      <img src="..." alt="..." class="img-rounded">
+      <!--圆形-->
+      <img src="..." alt="..." class="img-circle">
+      <!--相框-->
+      <img src="..." alt="..." class="img-thumbnail">
+      ```
+
+  * **表格**：[官方文档](https://v3.bootcss.com/css/#tables)
+
+    ```html
+    <table class="table table-bordered table-hover">
+    	...	
+    </table>
+    ```
+
+  * **表单**：[官方文档](https://v3.bootcss.com/css/#forms)
+
+    * 可以给表单项添加：class="form-control"(所有设置了 `.form-control` 类的 `<input>`、`<textarea>` 和 `<select>` 元素都将被默认设置宽度属性为 `width: 100%;`)
+
+      ```html
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputFile">File input</label>
+          <input type="file" id="exampleInputFile">
+          <p class="help-block">Example block-level help text here.</p>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Check me out
+          </label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      ```
 
 * 组件：
 
   * 导航条
+  
+    ```html
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    ```
+  
   * 分页条
+  
+    ```html
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li>
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+          <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    ```
+  
+    
 
 ### JS插件
 
-* 轮播图
+* 轮播图：[官方文档](https://v3.bootcss.com/javascript/#carousel)
+
