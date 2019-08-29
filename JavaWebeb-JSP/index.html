@@ -120,7 +120,7 @@
 
 
   <meta name="description" content="简介 概念：  Java Server Pages：java服务器端页面 可以理解为：一个特殊的页面，其中既可以指定定义html标签，又可以定义java代码 用于简化书写     原理  JSP本质上就是一个Servlet   JSP的脚本：JSP定义Java代码的方式  &amp;lt;%   代码 %&amp;gt;：定义的Java代码，在service方法中。service方法中可以定义什么，该脚本中就可以">
-<meta name="keywords" content="学习,Javaweb">
+<meta name="keywords" content="Javaweb,学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP——Java服务器端页面">
 <meta property="og:url" content="http://yoursite.com/JavaWebeb-JSP/index.html">
@@ -128,7 +128,7 @@
 <meta property="og:description" content="简介 概念：  Java Server Pages：java服务器端页面 可以理解为：一个特殊的页面，其中既可以指定定义html标签，又可以定义java代码 用于简化书写     原理  JSP本质上就是一个Servlet   JSP的脚本：JSP定义Java代码的方式  &amp;lt;%   代码 %&amp;gt;：定义的Java代码，在service方法中。service方法中可以定义什么，该脚本中就可以">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/MVC%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F.bmp">
-<meta property="og:updated_time" content="2019-08-29T05:25:59.121Z">
+<meta property="og:updated_time" content="2019-08-29T14:25:09.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSP——Java服务器端页面">
 <meta name="twitter:description" content="简介 概念：  Java Server Pages：java服务器端页面 可以理解为：一个特殊的页面，其中既可以指定定义html标签，又可以定义java代码 用于简化书写     原理  JSP本质上就是一个Servlet   JSP的脚本：JSP定义Java代码的方式  &amp;lt;%   代码 %&amp;gt;：定义的Java代码，在service方法中。service方法中可以定义什么，该脚本中就可以">
@@ -442,7 +442,7 @@
                 
               
 
-              <time title="创建时间：2019-08-29 09:48:19 / 修改时间：13:25:59" itemprop="dateCreated datePublished" datetime="2019-08-29T09:48:19+08:00">2019-08-29</time>
+              <time title="创建时间：2019-08-29 09:48:19 / 修改时间：22:25:09" itemprop="dateCreated datePublished" datetime="2019-08-29T09:48:19+08:00">2019-08-29</time>
             
 
             
@@ -679,6 +679,151 @@
 </ul>
 </li>
 </ul>
+<h2 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h2><ol>
+<li>概念：Expression Language 表达式语言</li>
+<li>作用：替换和简化jsp页面中Java的编写</li>
+<li>语法：${表达式}</li>
+<li><strong>注意</strong>：<ol>
+<li>jsp默认是支持EL表达式的</li>
+<li>忽略el表达式<ol>
+<li>设置jsp的page指令中：isELIgnored=”true”，忽略当前jsp页面中所有的el表达式</li>
+<li>${表达式}：忽略当前这个el表达式</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>使用：<ol>
+<li>运算：<ul>
+<li>运算符：<ol>
+<li>算数运算符：+ - * /(div) %(mod)</li>
+<li>比较运算符：&lt; &gt; &gt;= &lt;= != ==</li>
+<li>逻辑运算符：&amp;&amp;(and)  ||(or)  !(not)</li>
+<li>空运算符：empty<ul>
+<li>功能：用于判断字符串、集合、数组对象是否为null或者长度是否为0</li>
+<li>${empty list}</li>
+<li>${not empty list} 判断这些集合是否不为null并且长度大于零</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>获取值<ol>
+<li>el表达式只能从域对象中获取值</li>
+<li>语法：<ol>
+<li>${域名称.键名}：从指定域中获取指定键的值<ul>
+<li>域名称<ol>
+<li>pageScope → pageContext</li>
+<li>requestScope → request</li>
+<li>sessionScope → session</li>
+<li>applicationScope → application(ServletContext)</li>
+</ol>
+</li>
+<li>举例：在request域中存储了name=张三</li>
+<li>获取：${requestScope.name}</li>
+</ul>
+</li>
+<li>${键名}：表示一次从最小的域中查找是否有该键对应的值，知道找到为止</li>
+</ol>
+</li>
+<li>获取对象、List对象、Map集合的值<ol>
+<li>对象：${域名称.键名.属性名}<ul>
+<li>本质上会调用对象的getter方法(<strong>可以自己定义新的getter方法，属性名就是getter方法去掉get再将后面的第一个字母变为小写</strong>)</li>
+</ul>
+</li>
+<li>List集合：${域名称.键名[索引]}</li>
+<li>Map集合：<ul>
+<li>${域名称.键名.key名称}</li>
+<li>${域名称.键名[“key名称”]}</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>隐式对象：<ul>
+<li>el表达式中有11个隐式对象</li>
+<li>pageContext：<ul>
+<li>获取el的其它八个内置对象<ul>
+<li>${pageContext.request.contextPath}：动态获取虚拟目录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="JSTL标签"><a href="#JSTL标签" class="headerlink" title="JSTL标签"></a>JSTL标签</h2><ol>
+<li><p>概念：JavaServer Pages Tag Libary JSP标准标签库</p>
+<ul>
+<li>是由Apache组织提供的开源的免费的jsp标签</li>
+</ul>
+</li>
+<li><p>作用：用于简化和替换jsp页面上的Java代码</p>
+</li>
+<li><p>使用步骤</p>
+<ol>
+<li>导入jstl相关jar包</li>
+<li>引入标签库：taglib指令：&lt;%@ taglib %&gt;</li>
+<li>使用标签</li>
+</ol>
+</li>
+<li><p>常用JSTL标签：</p>
+<ol>
+<li><p>if：相当于java代码的if语句(没有else语句)</p>
+<ol>
+<li>属性<ul>
+<li>test 必需属性 接受布尔表达式，如果为true，则显示标签体内容，若为false，则不显示</li>
+<li>一般情况下，结合表达式一起使用</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">import</span>=<span class="string">"java.util.ArrayList"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">import</span>=<span class="string">"java.util.List"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">"c"</span> <span class="attr">uri</span>=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>JSTLDEMO<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">        <span class="attr">List</span> <span class="attr">list</span> = <span class="string">new</span> <span class="attr">ArrayList</span>();</span></span><br><span class="line"><span class="tag">        <span class="attr">list.add</span>("<span class="attr">a</span>");</span></span><br><span class="line"><span class="tag">        <span class="attr">list.add</span>("<span class="attr">b</span>");</span></span><br><span class="line"><span class="tag">        <span class="attr">request.setAttribute</span>("<span class="attr">list</span>", <span class="attr">list</span>);</span></span><br><span class="line"><span class="tag">    %&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:if</span> <span class="attr">test</span>=<span class="string">"$&#123;not empty list&#125;"</span>&gt;</span>遍历。。。<span class="tag">&lt;/<span class="name">c:if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>choose：相当于java代码的switch语句</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">	<span class="attr">request.setAttribute</span>("<span class="attr">number</span>", <span class="attr">3</span>);</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line">      </span><br><span class="line"><span class="tag">&lt;<span class="name">c:choose</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">"$&#123;number == 1&#125;"</span>&gt;</span>星期一<span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">"$&#123;number == 2&#125;"</span>&gt;</span>星期二<span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">"$&#123;number == 3&#125;"</span>&gt;</span>星期三<span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">"$&#123;number == 4&#125;"</span>&gt;</span>星期四<span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">"$&#123;number == 5&#125;"</span>&gt;</span>星期五<span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">"$&#123;number == 6&#125;"</span>&gt;</span>星期六<span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">c:when</span> <span class="attr">test</span>=<span class="string">"$&#123;number == 7&#125;"</span>&gt;</span>星期天<span class="tag">&lt;/<span class="name">c:when</span>&gt;</span></span><br><span class="line">      </span><br><span class="line">    <span class="tag">&lt;<span class="name">c:otherwise</span>&gt;</span>数字输入有误<span class="tag">&lt;/<span class="name">c:otherwise</span>&gt;</span></span><br><span class="line">      </span><br><span class="line"><span class="tag">&lt;/<span class="name">c:choose</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+<ol start="3">
+<li><p>foreach：相当于java代码的for语句</p>
+<ol>
+<li><p>用来完成重复操作</p>
+<ul>
+<li><p>属性：</p>
+<p>begin：开始值</p>
+<p>end：结束值</p>
+<p>var：临时变量</p>
+<p>step：步长</p>
+<p>varStatus：循环状态对象</p>
+<p>​        index：容器中元素的索引，从0开始</p>
+<p>​        count：循环次数，从1开始</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%--输出1到10--%</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">begin</span>=<span class="string">"1"</span> <span class="attr">end</span>=<span class="string">"10"</span> <span class="attr">var</span>=<span class="string">"i"</span> <span class="attr">step</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">    $&#123;i&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遍历容器</p>
+<ul>
+<li><p>属性</p>
+<p>items：容器对象</p>
+<p>var：容器中元素的临时变量</p>
+<p>varStatus：循环装阿泰对象</p>
+<p>​        index：容器中元素的索引，从0开始</p>
+<p>​        count：循环次数，从1开始</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">    <span class="attr">List</span> <span class="attr">list</span> = <span class="string">new</span> <span class="attr">ArrayList</span>();</span></span><br><span class="line"><span class="tag">    <span class="attr">list.add</span>("<span class="attr">aaa</span>");</span></span><br><span class="line"><span class="tag">    <span class="attr">list.add</span>("<span class="attr">bbb</span>");</span></span><br><span class="line"><span class="tag">    <span class="attr">list.add</span>("<span class="attr">ccc</span>");</span></span><br><span class="line"><span class="tag">    <span class="attr">list.add</span>("<span class="attr">ddd</span>");</span></span><br><span class="line"><span class="tag">    <span class="attr">request.setAttribute</span>("<span class="attr">list</span>", <span class="attr">list</span>);</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%--输出1到10--%</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">begin</span>=<span class="string">"1"</span> <span class="attr">end</span>=<span class="string">"10"</span> <span class="attr">var</span>=<span class="string">"i"</span> <span class="attr">step</span>=<span class="string">"1"</span> <span class="attr">varStatus</span>=<span class="string">"s"</span>&gt;</span></span><br><span class="line">    $&#123;i&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br><span class="line">           </span><br><span class="line"><span class="tag">&lt;<span class="name">c:forEach</span> <span class="attr">items</span>=<span class="string">"$&#123;list&#125;"</span> <span class="attr">var</span>=<span class="string">"str"</span> <span class="attr">varStatus</span>=<span class="string">"s"</span>&gt;</span></span><br><span class="line">    $&#123;s.index&#125; $&#123;s.count&#125; $&#123;str&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">c:forEach</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -702,9 +847,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习/" rel="tag"><i class="fa fa-tag"></i> 学习</a>
-          
             <a href="/tags/Javaweb/" rel="tag"><i class="fa fa-tag"></i> Javaweb</a>
+          
+            <a href="/tags/学习/" rel="tag"><i class="fa fa-tag"></i> 学习</a>
           
         </div>
       
@@ -943,7 +1088,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入"><span class="nav-number">2.</span> <span class="nav-text">深入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">2.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.2.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置对象"><span class="nav-number">2.3.</span> <span class="nav-text">内置对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC：开发模式"><span class="nav-number">3.</span> <span class="nav-text">MVC：开发模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入"><span class="nav-number">2.</span> <span class="nav-text">深入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">2.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.2.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置对象"><span class="nav-number">2.3.</span> <span class="nav-text">内置对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC：开发模式"><span class="nav-number">3.</span> <span class="nav-text">MVC：开发模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EL表达式"><span class="nav-number">4.</span> <span class="nav-text">EL表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSTL标签"><span class="nav-number">5.</span> <span class="nav-text">JSTL标签</span></a></li></ol></div>
             
 
           </div>
@@ -1004,7 +1149,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共33k字</span>
+  <span class="post-count">博客全站共36.1k字</span>
 </div>
         
 <div class="busuanzi-count">
