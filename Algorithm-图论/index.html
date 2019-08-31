@@ -132,7 +132,8 @@
 <meta property="og:image" content="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20190829162001.png">
 <meta property="og:image" content="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20190829163613.png">
 <meta property="og:image" content="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20190829165824.png">
-<meta property="og:updated_time" content="2019-08-29T09:03:22.012Z">
+<meta property="og:image" content="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20190830173241.png">
+<meta property="og:updated_time" content="2019-08-30T10:32:29.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图论">
 <meta name="twitter:description" content="简述​    图是一种多对多形式的数据结构，线性表（一对一）、树（一对多）都可以看作特殊形式的表。 术语 顶点(Vertex)，顶点的集合一般用V表示  边(Edge)，边的集合一般用E表示  ( v, w ) ∈ E，v、w ∈ V，这种边表示 无向边 &amp;lt; v, w &amp;gt; ∈ E， v、w ∈ V，这种边表示 有向边 一般不考虑 重边 和 自回路   无向图：所有边都是无向边的图  有">
@@ -463,7 +464,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-29 17:03:22" itemprop="dateModified" datetime="2019-08-29T17:03:22+08:00">2019-08-29</time>
+                <time title="修改时间：2019-08-30 18:32:29" itemprop="dateModified" datetime="2019-08-30T18:32:29+08:00">2019-08-30</time>
               
             
           </span>
@@ -636,10 +637,9 @@
 </ul>
 <h3 id="有权图的单源最短路径算法"><a href="#有权图的单源最短路径算法" class="headerlink" title="有权图的单源最短路径算法"></a>有权图的单源最短路径算法</h3><p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20190829163613.png" alt></p>
 <center>负值圈的情况一般不进行讨论</center>
+* 思路：按照递增的顺序找出到各个顶点的最短路
 
 <ul>
-<li><p>思路：按照递增的顺序找出到各个顶点的最短路</p>
-</li>
 <li><p>Dijkstra算法：</p>
 <ul>
 <li><p>令S={ 源点s + 已经确定了最短路径的顶点v<del>i</del> }</p>
@@ -655,7 +655,7 @@
 </ul>
 </li>
 </ul>
-<p><em>伪代码如下</em></p>
+<p><em>伪代码如下</em><a name="Dijkstra" href></a></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//dist[s]可初始化为0，其相邻点可初始化为它们之间边的权重，其余则初始化为正无穷</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(Vertex s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        V = 未收录定点中dist最小者; <span class="comment">//（1）</span></span><br><span class="line">        <span class="keyword">if</span>(这样的V不存在)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        </span><br><span class="line">        collected[V] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">for</span>(V的每个邻接点W)</span><br><span class="line">                <span class="keyword">if</span>(collected[W] == <span class="literal">false</span>)</span><br><span class="line">                    <span class="keyword">if</span>(dist[V] + E&lt;V,W&gt; &lt; dist[W])&#123;</span><br><span class="line">                        dist[W] = dist[V] + E&lt;V,W&gt;; <span class="comment">//（2）</span></span><br><span class="line">                        path[W] = V;</span><br><span class="line">                    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//不能解决有负边的情况</span></span><br><span class="line"><span class="comment">//该算法复杂度取决于（1）（2）步骤，</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>复杂度不同的解决方法：</p>
@@ -664,6 +664,81 @@
 </ul>
 </li>
 </ul>
+<h3 id="多源最短路径算法"><a href="#多源最短路径算法" class="headerlink" title="多源最短路径算法"></a>多源最短路径算法</h3><ul>
+<li>方法1：直接将单源最短路径调用|V|次<ul>
+<li>T = O(|V|^3^+|E|×|V|)，对于稀疏图的效果号</li>
+</ul>
+</li>
+<li>方法2：Floyd算法<ul>
+<li>T = O(|V|^3^)，对稠密图效果好</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Floyd算法</p>
+<ul>
+<li>D^k^[ i ][ j ] = 路径{i → { l ≤ k(编号小于等于k的顶点)} → j}的最小长度</li>
+<li>D^0^，D^1^，D^2^ ，D^3^，D^|v|-1^[ i ][ j ]即给出了 i 到 j 的正整最短距离</li>
+<li>D^-1^应该定义为带权的邻接矩阵，对角元为0；如果 i 和 j 之间没有直接关系，应该将D^-1^对应的值初始化为正无穷</li>
+<li>当D^k-1^已经完成，递推到D^k^时：<ul>
+<li>k ∉ 最短路径{i → { l ≤ k} → j}，则D^k^ = D^k-1^</li>
+<li>k ∈ 最短路径{i → { l ≤ k} → j}，则D^k^[ i ][ j ]  = D^k-1^[ i ][ k ]  +  D^k-1^[ k][ j ]</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Floyd</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            D[i][j] = G[i][j];</span><br><span class="line">            path[i][j] = <span class="number">-1</span>;	<span class="comment">//用于记录路径</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; N; k++)</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">            <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">                <span class="keyword">if</span>(D[i][k] + D[k][j] &gt; D[i][j])&#123;</span><br><span class="line">                    D[i][j] = D[i][k] + D[k][j];</span><br><span class="line">                    path[i][j] = k;</span><br><span class="line">                &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="最小生成树问题"><a href="#最小生成树问题" class="headerlink" title="最小生成树问题"></a>最小生成树问题</h2><ul>
+<li><p><strong>最小生成树（Mininum Spanning Tree）</strong>:</p>
+<ul>
+<li>是一棵<strong>树</strong>：<ul>
+<li>无回路</li>
+<li>|V|个顶点一定有|V-1|条边</li>
+</ul>
+</li>
+<li>是<strong>生成树</strong>：向生成树中任意加一条边都会构成回路<ul>
+<li>包含全部顶点</li>
+<li>|V|-1条边都在图里</li>
+</ul>
+</li>
+<li>边的权重<strong>和</strong>最小</li>
+</ul>
+<p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20190830173241.png" alt></p>
+</li>
+</ul>
+<ul>
+<li>思想：有约束的<strong>贪心算法</strong><ul>
+<li>约束：<ul>
+<li>只能用图里有的边</li>
+<li>只能正好用掉|V|-1条边</li>
+<li>不能有回路</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Prim算法——让一棵小树长大"><a href="#Prim算法——让一棵小树长大" class="headerlink" title="Prim算法——让一棵小树长大"></a>Prim算法——让一棵小树长大</h3><ul>
+<li>类似Dijkstra算法：<a href="#Dijkstra">Dijkstra伪代码码</a></li>
+<li>dist[V] = E(s, V) 或正无穷</li>
+<li>parent[s] = -1</li>
+<li><em>Prim算法的伪代码</em></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Prim</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MST = &#123;s&#125;;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        V = 未收录定点中dist最小者;</span><br><span class="line">        <span class="keyword">if</span>(这样的V不存在)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        将V收录进MST中;</span><br><span class="line">        <span class="keyword">for</span>( V的每个邻接点W )</span><br><span class="line">            <span class="keyword">if</span>( dist[W] != <span class="number">0</span><span class="comment">//W点未被收录 )</span></span><br><span class="line">                <span class="keyword">if</span>( E(V,W) &lt; dist[W] )</span><br><span class="line">                &#123;</span><br><span class="line">                    dist[W] = E(V,W);</span><br><span class="line">                    parent[W] = V;</span><br><span class="line">                &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(MST中收到的点不到|V|个)</span><br><span class="line">               Error(<span class="string">"生成树不存在"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<center>适合稠密图</center>
+
+
+
+<h3 id="Kruskal算法——将森林合并成树"><a href="#Kruskal算法——将森林合并成树" class="headerlink" title="Kruskal算法——将森林合并成树"></a>Kruskal算法——将森林合并成树</h3><ul>
+<li>直接按<strong>递增</strong>顺序选出图中权重最小的边（但不能与已选中的边构成回路）</li>
+<li>伪代码如下：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Kruskal</span><span class="params">(Graph G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MST = &#123; &#125;;</span><br><span class="line">    <span class="keyword">while</span>(MST中步到|V|<span class="number">-1</span>条边 &amp;&amp; E中还有边)</span><br><span class="line">    &#123;</span><br><span class="line">        从E中取一条权重最小的边E(V,W); <span class="comment">/*最小堆*/</span></span><br><span class="line">        将E(V,W)从E中删除;</span><br><span class="line">        <span class="keyword">if</span>(E(V,W)不在MST中构成回路)	<span class="comment">/*并查集*/</span></span><br><span class="line">            将E(V,W)加入MST;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            彻底无视E(V,W);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(MST中不到|V|<span class="number">-1</span>条边)</span><br><span class="line">        Error(<span class="string">"生成树不存在"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -786,7 +861,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -807,7 +882,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -854,7 +931,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -932,7 +1015,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简述"><span class="nav-number">1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#术语"><span class="nav-number">2.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的操作"><span class="nav-number">3.</span> <span class="nav-text">图的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图的创建"><span class="nav-number">3.1.</span> <span class="nav-text">图的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图的遍历"><span class="nav-number">3.2.</span> <span class="nav-text">图的遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最短路径问题"><span class="nav-number">4.</span> <span class="nav-text">最短路径问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无权图的单源最短路算法"><span class="nav-number">4.1.</span> <span class="nav-text">无权图的单源最短路算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有权图的单源最短路径算法"><span class="nav-number">4.2.</span> <span class="nav-text">有权图的单源最短路径算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简述"><span class="nav-number">1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#术语"><span class="nav-number">2.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的操作"><span class="nav-number">3.</span> <span class="nav-text">图的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图的创建"><span class="nav-number">3.1.</span> <span class="nav-text">图的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图的遍历"><span class="nav-number">3.2.</span> <span class="nav-text">图的遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最短路径问题"><span class="nav-number">4.</span> <span class="nav-text">最短路径问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无权图的单源最短路算法"><span class="nav-number">4.1.</span> <span class="nav-text">无权图的单源最短路算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有权图的单源最短路径算法"><span class="nav-number">4.2.</span> <span class="nav-text">有权图的单源最短路径算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多源最短路径算法"><span class="nav-number">4.3.</span> <span class="nav-text">多源最短路径算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小生成树问题"><span class="nav-number">5.</span> <span class="nav-text">最小生成树问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prim算法——让一棵小树长大"><span class="nav-number">5.1.</span> <span class="nav-text">Prim算法——让一棵小树长大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kruskal算法——将森林合并成树"><span class="nav-number">5.2.</span> <span class="nav-text">Kruskal算法——将森林合并成树</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -952,7 +1035,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019-08-29</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019-08-31</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -993,7 +1076,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共36.1k字</span>
+  <span class="post-count">博客全站共42.3k字</span>
 </div>
         
 <div class="busuanzi-count">
