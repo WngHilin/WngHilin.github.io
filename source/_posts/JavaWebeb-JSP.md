@@ -115,3 +115,190 @@ categories: JavaWeb
        2. 重用性高
     2. 缺点：
        1. 使得项目架构变得复杂，对开发人员要求高
+
+
+
+## EL表达式
+
+1. 概念：Expression Language 表达式语言
+2. 作用：替换和简化jsp页面中Java的编写
+3. 语法：${表达式}
+4. **注意**：
+   1. jsp默认是支持EL表达式的
+   2. 忽略el表达式
+      1. 设置jsp的page指令中：isELIgnored="true"，忽略当前jsp页面中所有的el表达式
+      2. \${表达式}：忽略当前这个el表达式
+5. 使用：
+   1. 运算：
+      * 运算符：
+        1. 算数运算符：+ - * /(div) %(mod)
+        2. 比较运算符：&lt; &gt; >= <= != ==
+        3. 逻辑运算符：&&(and)  ||(or)  !(not)
+        4. 空运算符：empty
+           * 功能：用于判断字符串、集合、数组对象是否为null或者长度是否为0
+           * ${empty list}
+           * ${not empty list} 判断这些集合是否不为null并且长度大于零
+   2. 获取值
+      1. el表达式只能从域对象中获取值
+      2. 语法：
+         1. ${域名称.键名}：从指定域中获取指定键的值
+            * 域名称
+              1. pageScope → pageContext
+              2. requestScope → request
+              3. sessionScope → session
+              4. applicationScope → application(ServletContext)
+            * 举例：在request域中存储了name=张三
+            * 获取：${requestScope.name}
+         2. ${键名}：表示一次从最小的域中查找是否有该键对应的值，知道找到为止
+      3. 获取对象、List对象、Map集合的值
+         1. 对象：${域名称.键名.属性名}
+            * 本质上会调用对象的getter方法(**可以自己定义新的getter方法，属性名就是getter方法去掉get再将后面的第一个字母变为小写**)
+         2. List集合：${域名称.键名[索引]}
+         3. Map集合：
+            * ${域名称.键名.key名称}
+            * ${域名称.键名["key名称"]}
+      4. 隐式对象：
+         * el表达式中有11个隐式对象
+         * pageContext：
+           * 获取el的其它八个内置对象
+             * ${pageContext.request.contextPath}：动态获取虚拟目录
+
+
+
+## JSTL标签
+
+1. 概念：JavaServer Pages Tag Libary JSP标准标签库
+
+   * 是由Apache组织提供的开源的免费的jsp标签
+
+2. 作用：用于简化和替换jsp页面上的Java代码
+
+3. 使用步骤
+
+   1. 导入jstl相关jar包
+   2. 引入标签库：taglib指令：<%@ taglib %&gt;
+   3. 使用标签
+
+4. 常用JSTL标签：
+
+   1. if：相当于java代码的if语句(没有else语句)
+
+      1. 属性
+         * test 必需属性 接受布尔表达式，如果为true，则显示标签体内容，若为false，则不显示
+         * 一般情况下，结合表达式一起使用
+
+      ```html
+      <%@ page import="java.util.ArrayList" %>
+      <%@ page import="java.util.List" %>
+      <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+      <html>
+      <head>
+          <title>JSTLDEMO</title>
+      </head>
+      <body>
+          <%
+              List list = new ArrayList();
+              list.add("a");
+              list.add("b");
+              request.setAttribute("list", list);
+          %>
+      
+          <c:if test="${not empty list}">遍历。。。</c:if>
+      </body>
+      </html>
+      ```
+
+   2. choose：相当于java代码的switch语句
+
+      ```html
+          <%
+         		request.setAttribute("number", 3);
+          %>
+      
+          <c:choose>
+              <c:when test="${number == 1}">星期一</c:when>
+              <c:when test="${number == 2}">星期二</c:when>
+              <c:when test="${number == 3}">星期三</c:when>
+              <c:when test="${number == 4}">星期四</c:when>
+              <c:when test="${number == 5}">星期五</c:when>
+              <c:when test="${number == 6}">星期六</c:when>
+              <c:when test="${number == 7}">星期天</c:when>
+      
+              <c:otherwise>数字输入有误</c:otherwise>
+      
+          </c:choose>
+      ```
+
+      
+
+   3. foreach：相当于java代码的for语句
+
+      1. 用来完成重复操作
+
+         * 属性：
+
+           begin：开始值
+
+           end：结束值
+
+           var：临时变量
+
+           step：步长
+
+           varStatus：循环状态对象
+
+           ​		index：容器中元素的索引，从0开始
+
+           ​		count：循环次数，从1开始
+
+         ```html
+             <%--输出1到10--%>
+             <c:forEach begin="1" end="10" var="i" step="1">
+                 ${i}<br>
+             </c:forEach>
+         ```
+
+      2. 遍历容器
+
+         * 属性
+
+           items：容器对象
+
+           var：容器中元素的临时变量
+
+           varStatus：循环装阿泰对象
+
+           ​		index：容器中元素的索引，从0开始
+
+           ​		count：循环次数，从1开始
+
+           ```html
+               <%
+                   List list = new ArrayList();
+                   list.add("aaa");
+                   list.add("bbb");
+                   list.add("ccc");
+                   list.add("ddd");
+                   request.setAttribute("list", list);
+               %>
+               <%--输出1到10--%>
+               <c:forEach begin="1" end="10" var="i" step="1" varStatus="s">
+                   ${i}<br>
+               </c:forEach>
+           
+               <c:forEach items="${list}" var="str" varStatus="s">
+                   ${s.index} ${s.count} ${str}<br>
+               </c:forEach>
+           ```
+
+
+
+
+## 三层架构：软件设计架构
+
+1. 界面层(表示层)：用户看到的界面，用户可以通过界面上的组件和服务器进行交互
+2. 业务逻辑层：处理业务逻辑。
+3. 数据访问层：操作数据存储文件
+
+![](https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/三层架构.bmp)
