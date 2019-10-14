@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="初步理解 步骤 导入jar包 在web.xml中配置DispatcherServlet 加入SpringMVC配置文件 编写处理请求的处理器，并将其标识为处理器 编写视图">
+  <meta name="description" content="初步理解 步骤  导入jar包  在web.xml中配置DispatcherServlet 12345678910&amp;lt;servlet&amp;gt;    &amp;lt;servlet-name&amp;gt;HelloWeb&amp;lt;/servlet-name&amp;gt;    &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.DispatcherServlet&amp;">
 <meta name="keywords" content="学习,JavaWeb,框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC学习">
 <meta property="og:url" content="http://yoursite.com/Spring-SpringMVC/index.html">
 <meta property="og:site_name" content="WngHilin&#39;s Blog">
-<meta property="og:description" content="初步理解 步骤 导入jar包 在web.xml中配置DispatcherServlet 加入SpringMVC配置文件 编写处理请求的处理器，并将其标识为处理器 编写视图">
+<meta property="og:description" content="初步理解 步骤  导入jar包  在web.xml中配置DispatcherServlet 12345678910&amp;lt;servlet&amp;gt;    &amp;lt;servlet-name&amp;gt;HelloWeb&amp;lt;/servlet-name&amp;gt;    &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.DispatcherServlet&amp;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-09T12:28:59.621Z">
+<meta property="og:updated_time" content="2019-10-14T08:45:58.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC学习">
-<meta name="twitter:description" content="初步理解 步骤 导入jar包 在web.xml中配置DispatcherServlet 加入SpringMVC配置文件 编写处理请求的处理器，并将其标识为处理器 编写视图">
+<meta name="twitter:description" content="初步理解 步骤  导入jar包  在web.xml中配置DispatcherServlet 12345678910&amp;lt;servlet&amp;gt;    &amp;lt;servlet-name&amp;gt;HelloWeb&amp;lt;/servlet-name&amp;gt;    &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.DispatcherServlet&amp;">
 
 
 
@@ -457,7 +457,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-09 20:28:59" itemprop="dateModified" datetime="2019-10-09T20:28:59+08:00">2019-10-09</time>
+                <time title="修改时间：2019-10-14 16:45:58" itemprop="dateModified" datetime="2019-10-14T16:45:58+08:00">2019-10-14</time>
               
             
           </span>
@@ -510,16 +510,94 @@
 
       
         <h2 id="初步理解"><a href="#初步理解" class="headerlink" title="初步理解"></a>初步理解</h2><ul>
-<li>步骤<ol>
-<li>导入jar包</li>
-<li>在web.xml中配置DispatcherServlet</li>
-<li>加入SpringMVC配置文件</li>
-<li>编写处理请求的处理器，并将其标识为处理器</li>
-<li>编写视图</li>
+<li><p>步骤</p>
+<ol>
+<li><p>导入jar包</p>
+</li>
+<li><p>在web.xml中配置DispatcherServlet</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>HelloWeb<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>HelloWeb<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 </li>
 </ul>
-
+<ol>
+<li><p>加入SpringMVC配置文件</p>
+<ul>
+<li>默认为WEB-INF/[servlet-name]-servlet.xml, 也可以在servlet标签中使用init-param进行指定</li>
+</ul>
+</li>
+<li><p>编写处理请求的处理器，并将其标识为处理器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">printHello</span><span class="params">(ModelMap model)</span></span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">"message"</span>, <span class="string">"Hello World"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>编写视图</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"top.wnghilin.HelloWorld"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/WEB-INF/jsp/"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Request相关注解"><a href="#Request相关注解" class="headerlink" title="Request相关注解"></a>Request相关注解</h2><h3 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="RequestMapping"></a>RequestMapping</h3><p>除了修饰方法，也可以修饰类</p>
+<ol>
+<li>类定义处：提供初步的请求映射信息，相对于WEB应用的根目录</li>
+<li>方法处：提供进一步的细分映射信息（如类定义处为/hello，方法处为/hello1，访问该方法就为/hello/hello1）</li>
+<li>相对于类定义处的URL。若类定义为标注@RequestMapping，则方法处标记的URL相对于WEB应用的根目录</li>
+</ol>
+<ul>
+<li><p>指定请求方式：</p>
+<ul>
+<li>method属性：取值为RequestMethod.GET和RequestMethod.POST</li>
+</ul>
+</li>
+<li><p>指定请求参数和请求头（了解）</p>
+<ul>
+<li><p>params：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">params = &#123;<span class="string">"username"</span>, <span class="string">"age!=10"</span>&#125;<span class="comment">//指定参数中必须有username，且参数age不能等于10</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>headers：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">headers=&#123;<span class="string">"Accept-Language=zh-CN,zh,q=0.8"</span>&#125;<span class="comment">//指定该请求头中Accept-Language的值必须为zh-CN,zh,q=0.8，否则无法访问</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>RequestMapping支持Ant风格的URL</p>
+<ul>
+<li>?：匹配文件名中的一个字符</li>
+<li>*：匹配文件名中的任意字符</li>
+<li>**：匹配多层路径</li>
+<li>如：/user/<em>/createUser匹配/user/aaa/createUser、/user/*</em>/createUser匹配/user/createUser或/user/aaa/bbb/createUser等URL</li>
+</ul>
+</li>
+<li><p><strong>@PathVarieble</strong>：可以来映射URL中的占位符到目标方法的参数中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testPathVarieble/&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testPathVarieble</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id)</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"test: "</span> + id);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>URL中的id值可以传入testPathVarieble的id中</p>
+</li>
+</ul>
+<blockquote>
+<p>HTTP协议中，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源，PUT用来更新资源，DELETE用来删除资源</p>
+</blockquote>
+<ul>
+<li><p><strong>REST</strong>风格示例</p>
+<ul>
+<li>/order/1 HTTP GET  得到id = 1的order</li>
+<li>/order/1 HTTP DELETE  得删除d = 1的order</li>
+<li>/order/1 HTTP PUT 更新id = 1的order</li>
+<li>/order HTTP POST 新增order</li>
+</ul>
+</li>
+<li><p>HiddenHttpMethodFilter：浏览器form表单值只支持GET与POST请求。Spring3.0中添加了一个过滤器，可轻易将这些请求转换为标准的http方法，使得其支持GET、POST、PUT与DELETE请求</p>
+<ul>
+<li><p>如何发送<strong>PUT</strong>请求和<strong>DELETE</strong>请求</p>
+<ol>
+<li><p>需要配置HiddenHttpMethodFilter</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--再web.xml中配置HiddenHttpMethodFilter--&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>HiddenHttpMethodFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.HiddenHttpMethodFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--对所有的请求进行过滤--&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>HiddenHttpMethodFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要发送POST 请求</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>3. 需要在发送POST请求时携带一个name=&quot;_method&quot;的隐藏域，值为PUT或DELETE
+</code></pre>
       
     </div>
 
@@ -809,7 +887,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步理解"><span class="nav-number">1.</span> <span class="nav-text">初步理解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步理解"><span class="nav-number">1.</span> <span class="nav-text">初步理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request相关注解"><span class="nav-number">2.</span> <span class="nav-text">Request相关注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RequestMapping"><span class="nav-number">2.1.</span> <span class="nav-text">RequestMapping</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -829,7 +907,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019-10-11</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019-10-14</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -870,7 +948,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共48k字</span>
+  <span class="post-count">博客全站共48.7k字</span>
 </div>
         
 <div class="busuanzi-count">

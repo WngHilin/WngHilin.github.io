@@ -1924,7 +1924,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8e0dff;
+  background: #ffbe7c;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3205,7 +3205,7 @@ ul.breadcrumb li+li:last-child {
 }
 @media screen and (min-width: 1200px) {
   body {
-    background: url("http://tva1.sinaimg.cn/large/0060lm7Tly1g5lgu71q4qj31hc0u0u0x.jpg");
+    background: url("https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/v2-8ac2ae252fbfe25d587ccc7cff3c56d5_hd.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
