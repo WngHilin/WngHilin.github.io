@@ -127,10 +127,13 @@
 <meta property="og:site_name" content="WngHilin&#39;s Blog">
 <meta property="og:description" content="初步理解 步骤  导入jar包  在web.xml中配置DispatcherServlet 12345678910&amp;lt;servlet&amp;gt;    &amp;lt;servlet-name&amp;gt;HelloWeb&amp;lt;/servlet-name&amp;gt;    &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.DispatcherServlet&amp;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-15T14:41:45.534Z">
+<meta property="og:image" content="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191017172513.png">
+<meta property="og:image" content="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191017172636.png">
+<meta property="og:updated_time" content="2019-10-17T14:53:33.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC学习">
 <meta name="twitter:description" content="初步理解 步骤  导入jar包  在web.xml中配置DispatcherServlet 12345678910&amp;lt;servlet&amp;gt;    &amp;lt;servlet-name&amp;gt;HelloWeb&amp;lt;/servlet-name&amp;gt;    &amp;lt;servlet-class&amp;gt;org.springframework.web.servlet.DispatcherServlet&amp;">
+<meta name="twitter:image" content="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191017172513.png">
 
 
 
@@ -457,7 +460,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-15 22:41:45" itemprop="dateModified" datetime="2019-10-15T22:41:45+08:00">2019-10-15</time>
+                <time title="修改时间：2019-10-17 22:53:33" itemprop="dateModified" datetime="2019-10-17T22:53:33+08:00">2019-10-17</time>
               
             
           </span>
@@ -695,6 +698,26 @@
 </ul>
 </li>
 </ul>
+<ul>
+<li><p>@ModelAttribute注解</p>
+<ul>
+<li><p>从数据库中获取一个对象要修改它的属性值，但有些属性值不能修改，只修改能修改的部分，普通情况下，没被修改的部分会为空，如图</p>
+<p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191017172513.png" alt></p>
+</li>
+<li><p>在获取对象的方法添加@ModelAttribute注解，可以解决这个问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ModelAttribute</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUser</span><span class="params">(@RequestParam(value = <span class="string">"id"</span>, required = <span class="keyword">false</span>)</span>Integer id,</span></span><br><span class="line"><span class="function">                    Map&lt;String, Object&gt; map)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(id != <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="comment">//模拟从数据库获取对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="number">1</span>, <span class="string">"xxxxxx"</span>, <span class="string">"123456"</span>, <span class="number">18</span>, <span class="string">"xxxx@gmail.com"</span>);</span><br><span class="line">        System.out.println(<span class="string">"原数据: "</span> + user);</span><br><span class="line">        </span><br><span class="line">        map.put(<span class="string">"user"</span>, user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191017172636.png" alt></p>
+</li>
+<li><p><strong>运行流程</strong>：</p>
+<ol>
+<li>执行@ModelAttribute注解修饰的方法：从数据库中去除对象，把对象放入Map中，键为user</li>
+<li>SpringMVC从Map中取出User对象，并把表单的请求参数赋给该User对象的对应属性</li>
+<li>SpringMVC把上述对象传入目标方法的参数</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -744,6 +767,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Deeplearningning-Basics/" rel="prev" title="深度学习基础知识">
+                深度学习基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -815,7 +842,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -840,7 +867,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -901,7 +930,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -999,7 +1030,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019-10-15</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019-11-05</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1040,7 +1071,7 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共42.3k字</span>
+  <span class="post-count">博客全站共42.7k字</span>
 </div>
         
 <div class="busuanzi-count">
@@ -1496,6 +1527,13 @@ setInterval("createtime()",250);
   
 
   
+  
+
+  
+  
+
+  
+
 
   
 
