@@ -35,11 +35,6 @@ categories: JavaWeb
 		
 		* 多用于对象的获取字节码的方式
 		
-		```
-		
-		```
-		
-		
 	
 	* 结论：
 		同一个字节码文件(*.class)在一次程序运行过程中，只会被加载一次，不论通过哪一种方式获取的Class对象都是同一个。
@@ -68,24 +63,26 @@ categories: JavaWeb
 				  }
 			```
 			
-			* 成员变量的操作（Field类的方法）
 			
-			  1. 设置值
 			
-			     - void set(Object obj, Object value)  
+			成员变量的操作（Field类的方法）
 			
-			     ```java
-			     Person p = new Person();
-			     a.set(p, "a"); //设置p对象的a属性的值
-			     ```
+			1. 设置值
 			
-			  2. 获取值
+			   - void set(Object obj, Object value)  
 			
-			     - get(Object obj) 
+			   ```java
+			   Person p = new Person();
+			   a.set(p, "a"); //设置p对象的a属性的值
+			   ```
 			
-			  3. 忽略访问权限修饰符的安全检查
+			2. 获取值
 			
-			     * setAccessible(true):暴力反射，设置之后即可访问private和protected修饰的变量
+			   - get(Object obj) 
+			
+			3. 忽略访问权限修饰符的安全检查
+			
+			   * setAccessible(true):暴力反射，设置之后即可访问private和protected修饰的变量
 			
 		2. 获取构造方法：
 		

@@ -292,7 +292,6 @@ public class JDBCdemo3 {
   * 抽取方法释放资源
 
 <center>示例</center>
-
 ```java
 import java.io.File;
 import java.io.FileReader;
@@ -406,10 +405,3 @@ public class JDBCUtils {
     }
 }
 ```
-
-
-
-
-
-
-

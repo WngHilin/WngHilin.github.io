@@ -218,7 +218,7 @@ categories: JavaWeb
 				* 告诉服务器，当前请求从哪里来
 					* 作用：
 						1. 防盗链：
-						2. 统计工作：
+					2. 统计工作：
 	3. 请求空行
 		空行，就是用于分割POST请求的请求头，和请求体的。
 	4. 请求体(正文)：
@@ -235,8 +235,6 @@ categories: JavaWeb
 			Referer: http://localhost/login.html
 			Connection: keep-alive
 			Upgrade-Insecure-Requests: 1
-		
-	
 			username=zhangsan
 
 
