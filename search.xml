@@ -4,11 +4,38 @@
   
     
     <entry>
-      <title>深度学习基础知识</title>
-      <link href="/Deeplearningning-Basics/"/>
-      <url>/Deeplearningning-Basics/</url>
+      <title>network_计算机网络概述</title>
+      <link href="/network-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"/>
+      <url>/network-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</url>
       
-        <content type="html"><![CDATA[<h2 id="二分分类"><a href="#二分分类" class="headerlink" title="二分分类"></a>二分分类</h2><blockquote><p>问题引入：你需要识别图片是否含有一只猫，如果含有，则返回1，否则返回0</p></blockquote><ol><li>设这张图片为64×64像素，则这张图片实际上由三个64×64的矩阵构成，分别表示红绿蓝的RGB值，我们用一个64×64×3的向量x来表示这张图片，称为<strong>特征向量</strong></li><li><p>一些符号：</p><ul><li><strong>n~x~</strong>：特征向量的长度（有时用 n 表示）</li><li><strong>(x, y)</strong>：x ∈ R^nx^ ，y ∈ {0， 1}</li><li><strong>m</strong>：训练集(x^(1)^, y^(1)^), (x^(2)^, y^(2)^), (x^(3)^, y^(3)^)…… (x^(m)^, y^(m)^)的训练样本数量</li><li><strong>m~train~</strong>：训练集样本数         <strong>m~tes</strong>t~：测试集样本数</li><li><strong>X</strong>：由训练集中特征向量x~1~、x~2~构成的矩阵n~x~×m的矩阵</li></ul></li><li><p><strong>logistic回归</strong>：</p><ul><li>给定x， ŷ  = P(y=1 | x)</li><li>参数： ω ∈ R^nx^，b ∈ R</li><li>输出：ŷ  = σ（ ω^T^ + b）</li></ul></li></ol>]]></content>
+        <content type="html"><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><ul><li><p>定义：计算机网络就是<strong>互连</strong>的、<strong>自治</strong>的计算机集合</p><ul><li>自治 - 没有主从关系</li><li>互连 - 互联互通</li><li>不同的主机通过<strong>通信链路</strong>进行连接</li></ul></li><li><p>距离远、数量大时，使用<strong>交换网络</strong>进行互连</p><p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191107150021.png" alt></p></li><li><p><strong>Internet</strong>：</p></li><li><p><strong>组成细节</strong>角度</p><ul><li><p>全球最大的互联网络</p></li><li><p>ISP(Internet Service Provider)：网络互连的“网络之网络”，也就是“主机”就是网络的网络</p><p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191107150332.png" alt></p></li><li><p>数以百万计的互连的计算设备的集合：称作<strong>主机</strong>(hosts)或<strong>端系统</strong>，都会运行网络应用，通过通信链路连接在一起</p></li><li><p><strong>分组交换</strong>：转发分组（数据包）</p><ul><li>路由器和交换机</li></ul></li></ul></li><li><p><strong>服务</strong>角度：</p><ul><li>Internet为网络应用提供通信服务的通信基础设施</li><li>为网络应用提供应用编程接口(API)</li></ul></li></ul><h3 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h3><ul><li>计算机网络中的数据交换必须遵守事先约定好的<strong>规则</strong>，这些规则就是协议</li><li><strong>网络通信</strong>：<ul><li>信息主体是“机器”</li><li>交换“电子化”和“数字化”的信息</li><li>计算机网络的所有通信过程都必须遵守某种/些规则，这些规则就是<strong>协议</strong></li></ul></li><li><strong>网络协议</strong>（network protocol）：简称为<strong>协议</strong>，是为进行网络中的数据交换而建立的规则、标准或约定<ul><li><strong>协议</strong>规定了通信实体之间所交换的信息的<strong>格式、意义、顺序</strong>以及针对收到信息或发生的时间所采取的<strong>动作</strong></li></ul></li><li>协议的<strong>三要素</strong>：<ul><li>语法（Syntax）<ul><li>数据与控制信息的结构或格式</li><li>信号电平</li></ul></li><li>语义（Semantics）<ul><li>需要发出何种控制信息</li><li>完成何种动作以及做出何种响应</li><li>差错控制</li></ul></li><li>时序（Timing）<ul><li>时间顺序</li><li>速度匹配</li></ul></li></ul></li><li>Internet协议标准：RFC、IETF</li></ul><p>通俗地讲，协议就是两台计算机之间通信索要遵守的共同标准，比如一个广东人和一个四川人想要交流，就可以都使用双方都懂的普通话进行交流，这时“普通话”就可以看作一种“协议”。而网络协议也是为了保证不同计算设备能够正常交流所制定的规则。</p><h2 id="计算机网络结构"><a href="#计算机网络结构" class="headerlink" title="计算机网络结构"></a>计算机网络结构</h2><ul><li><strong>网络边缘</strong>：<ul><li>主机、网络应用</li><li>通过<strong>物理介质</strong>接入网络，如有线或无线通信链路</li></ul></li><li><strong>网络核心（核心网络）</strong><ul><li>互联的路由器（或分组转发设备）</li><li>网络的网络</li></ul></li></ul><ul><li><strong>主机（端系统）</strong>：<ul><li>位于网络的最边缘处，会运行各种网络应用程序，如：Web，email</li><li><strong>客户/服务器应用模型</strong>（client/server）：<ul><li>客户发送请求，接收服务器响应</li><li>如：Web应用，文件传输FTP应用</li></ul></li><li><strong>对等应用模型</strong>（peer-peer，P2P）：<ul><li>无（或不仅以来）专用服务器</li><li>通信在对等实体之间直接进行</li><li>如：Gnutelia，BT，QQ</li></ul></li></ul></li></ul><ul><li><strong>接入网络</strong> ：<ul><li>将网络边缘接入核心网（边缘路由器）</li><li><strong>带宽</strong>（bandwidth）（bps）</li><li><strong>共享/独有</strong>：</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网络 </tag>
+            
+            <tag> 概述 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>深度学习基础知识</title>
+      <link href="/Deeplearning-Basics/"/>
+      <url>/Deeplearning-Basics/</url>
+      
+        <content type="html"><![CDATA[<h2 id="二分分类"><a href="#二分分类" class="headerlink" title="二分分类"></a>二分分类</h2><blockquote><p>问题引入：你需要识别图片是否含有一只猫，如果含有，则返回1，否则返回0</p></blockquote><h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><ol><li><p>设这张图片为64×64像素，则这张图片实际上由三个64×64的矩阵构成，分别表示红绿蓝的RGB值，我们用一个64×64×3的向量x来表示这张图片，称为<strong>特征向量</strong></p></li><li><p>一些符号：</p><ul><li><strong>n~x~</strong>：特征向量的长度（有时用 n 表示）</li><li><strong>(x, y)</strong>：x ∈ R^nx^ ，y ∈ {0， 1}</li><li><strong>m</strong>：训练集(x^(1)^, y^(1)^), (x^(2)^, y^(2)^), (x^(3)^, y^(3)^)…… (x^(m)^, y^(m)^)的训练样本数量</li><li><strong>m~train~</strong>：训练集样本数         <strong>m~test~</strong>：测试集样本数</li><li><strong>X</strong>：由训练集中特征向量x~1~、x~2~构成的矩阵n~x~×m的矩阵</li></ul></li><li><p><strong>logistic回归</strong>：</p><ul><li><p>给定$x$，令$\hat y  = P(y=1 | x)  $</p></li><li><p>参数： $w \in R^{n_x}，b \in R$</p></li><li><p>输出：$\hat y = w（ w^Tx + b）$</p></li><li><p>sigmoid函数: $\sigma(z) = \frac{1}{1+e^{-z}}$，图像如下：</p><p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191107160317.png" alt></p></li></ul></li></ol><ul><li><p><strong>损失函数</strong>（Loss Function）：</p><script type="math/tex; mode=display">L(\hat y, y) = \frac{1}{2}(\hat y - y)^2</script><p>我们定义这个函数来衡量 $\hat y$ 和 y 有多接近</p><p>但我们在逻辑回归中使用以下损失函数：</p><script type="math/tex; mode=display">L(\hat y, y) = -(ylog\hat y + (1 - y)log(1 - \hat y))</script><p>我们需要使得损失函数尽可能小。对以上函数，y = 1时，第二项为0，故只看第一项，第一项中，如果使 $-ylog\hat y$ 尽可能小，就可以让要想使得 $log\hat y$也就是$\hat y$ 尽可能大，即尽可能接近1，与y也就越加接近。y = 0时，第一项为零，同理可分析可知，$L(\hat y, y)$尽可能小时，会使得$\hat y$更接近1。</p><p>损失函数衡量了对单个样本预测的准确程度</p></li></ul><ul><li><strong>成本函数</strong>（Cost Function）：<script type="math/tex; mode=display">\begin{equation}\begin{split}J(w, b) &= -\frac{1}{m}\sum_{i=1}^{m}L(\hat y^{(i)}, y^{(i)})\\&=-\frac{1}{m}\sum_{i=1}^{m}-(y^{(i)}log\hat y^{(i)} + (1 - y^{(i)})log(1 - \hat y^{(i)}))\end{split}\end{equation}</script>成本函数衡量了对整个样本集预测的准确程度，且$J(w,b)$越小越好</li></ul><h3 id="梯度下降法（Gradient-Descent）"><a href="#梯度下降法（Gradient-Descent）" class="headerlink" title="梯度下降法（Gradient Descent）"></a>梯度下降法（Gradient Descent）</h3><p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/image-20191107163229574.png" alt></p><ul><li><p>使用以上成本函数可以保证$J(w,b)$是凸函数，否则可能出现多个局部最优解，影响梯度下降法的结果（类似高次多项式函数的情况）</p></li><li><p>梯度下降法所做的，就是从初始点开始，一步步的沿着最陡的下降路线朝着函数的最低点走。而这个最陡的下降路线，可以用高等数学中学习到的<strong>偏导数</strong>进行求解。</p></li><li><p>为了方便解释，首先忽略b，仅仅对w进行梯度下降法，则$J(w)$d的图像如图所示：</p><p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191107163803.png" alt></p><p>我们对w进行如下重复操作：</p><script type="math/tex; mode=display">w:=w - \alpha\frac{\mathrm{d}J(w)}{\mathrm{d}w}</script><p>我们知道，导数代表该点的斜率，若w大于最小值所在的点最高点，则其导数为正值，减去导数，w减小，故更加接近最小值所在点；若w小于最小值所在的点，同理可推得，其也更加接近最小值，如图所示：</p><p><img src="https://wnghilin-blog.oss-cn-beijing.aliyuncs.com/20191107164833.png" alt></p></li></ul>]]></content>
       
       
       <categories>
